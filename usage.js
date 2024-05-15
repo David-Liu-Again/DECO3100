@@ -1,3 +1,6 @@
+// Should be a vertical bar chart!!!!
+
+
 //Below line taken from Week 8 tutorial slides
 const unpack = (data, key) => data.map(row => row[key]);
 
@@ -18,8 +21,9 @@ Plotly.d3.csv("data/smtime.csv", usage_data => {
         x: year,
         y: global,
         name: 'Global',
-        mode: 'lines+markers',
+        mode: 'lines+markers'
     }
+
 
      var traceLa = {
          x: year,
@@ -63,14 +67,19 @@ Plotly.d3.csv("data/smtime.csv", usage_data => {
 
     var data = [traceGlobal, traceLa, traceMea, traceAp, traceNa, traceEu];
 
+    // Data setup
     data.forEach(trace => {
         // let hours = Math.floor(trace.y/ 60);
         // let minutes = trace.y % 60;
         // let usageText = `${hours} hours and ${remainingMinutes} minutes`;
 
-        
+        // Set up custom text to display minutes and hours acurately
+        trace.customdata = trace.y.map(minutes => (Math.floor(minutes/60) + " hours " + minutes%60 + " minutes "));
         trace.hovertemplate = "<b>Region: </b>" + `${trace.name}<br>` //must use backtick
-        + '<b>Year: </b>%{x}<br>' + '<b>Average Usage:%{2019-01-01|%A} hours and %{y} minutes<extra></extra>';
+        + '<b>Year: </b>%{x}<br>' + '<b>Average Usage: %{customdata}<extra></extra>';
+
+        // Convert y to hours
+        trace.y = trace.y.map(minutes => minutes/60);
     })
 
 
@@ -152,7 +161,17 @@ Plotly.d3.csv("data/smtime.csv", usage_data => {
          },
 
          yaxis:{
-            title: 'Average daily usage time (minutes)'
+            title: 'Average daily usage time (hours)',
+            tickmode: "linear",
+            tick0: 0,
+            dtick: 1,
+            tickwidth: 0,
+            range: [1, 4]
+         },
+
+         margin:{
+            pad:0,
+            t:20
          }
 
          //slider
