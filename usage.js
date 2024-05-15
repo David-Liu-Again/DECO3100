@@ -2,61 +2,78 @@
 const unpack = (data, key) => data.map(row => row[key]);
 
 Plotly.d3.csv("data/smtime.csv", usage_data => {
+    //Unpack all coloumns
     const year = unpack(usage_data, 'Year');
     const global = unpack(usage_data, 'Global');
-    const lm = unpack(usage_data, 'Latin America');
+    const la = unpack(usage_data, 'Latin America');
     const mea = unpack(usage_data, 'Middle East & Africa');
     const ap = unpack(usage_data, 'Asia-Pacific');
     const na = unpack(usage_data, 'North America');
     const eu = unpack(usage_data, 'Europe');
     console.log("Eu" + eu);
 
-    // var traceAus = {
-    //     x: year,
-    //     y: aus,
-    //     name: 'Australia',
-    //     mode: 'lines+markers',
+
+
+    var traceGlobal = {
+        x: year,
+        y: global,
+        name: 'Global',
+        mode: 'lines+markers',
+    }
+
+     var traceLa = {
+         x: year,
+         y: la,
+         name: 'Latin America',
+         mode: 'lines+markers',
         
-    // }
+    }
 
-    // var traceChi = {
-    //     x: year,
-    //     y: lm,
-    //     name: 'China',
-    //     mode: 'lines+markers',
+    var traceMea = {
+        x: year,
+        y: mea,
+        name: 'Middle East & Africa',
+        mode: 'lines+markers',
+    
+    }
+
+    var traceAp = {
+            x: year,
+            y: ap,
+            name: 'Asia-Pacific',
+            mode: 'lines+markers',
         
-    // }
+    }
 
-    // var traceUk = {
-    //     x: year,
-    //     y: mea,
-    //     name: 'United Kingdom',
-    //     mode: 'lines+markers',
+    var traceNa = {
+        x: year,
+        y: na,
+        name: 'North America',
+        mode: 'lines+markers',
+    
+    }
+
+    var traceEu = {
+        x: year,
+        y: eu,
+        name: 'Europe',
+        mode: 'lines+markers',
+    
+    }
+
+    var data = [traceGlobal, traceLa, traceMea, traceAp, traceNa, traceEu];
+
+    data.forEach(trace => {
+        // let hours = Math.floor(trace.y/ 60);
+        // let minutes = trace.y % 60;
+        // let usageText = `${hours} hours and ${remainingMinutes} minutes`;
+
         
-    // }
+        trace.hovertemplate = "<b>Region: </b>" + `${trace.name}<br>` //must use backtick
+        + '<b>Year: </b>%{x}<br>' + '<b>Average Usage:%{2019-01-01|%A} hours and %{y} minutes<extra></extra>';
+    })
 
-    // var traceUs = {
-    //     x: year,
-    //     y: ap,
-    //     name: 'United States of America',
-    //     mode: 'lines+markers',
-        
-    // }
 
-    // var traceGer = {
-    //     x: year,
-    //     y: na,
-    //     name: 'Germany',
-    //     mode: 'lines+markers',
-        
-    // }
-
-    // var data = [traceAus, traceChi, traceUk, traceUs, traceGer];
-
-    // data.forEach(trace => {
-    //     trace.hovertemplate = "<b>Country: </b>" + `${trace.name}<br>` //must use backtick
-    //     + '<b>Year: </b>%{x}<br>' + '<b>Population: </b>%{y:.2f%}%<extra></extra>';
-    // })
     // var updatemenus = [{
     //     type: 'buttons',
     //     showactive: false, //determines whether the currently active button or menu item should be highlighted or not
@@ -74,112 +91,108 @@ Plotly.d3.csv("data/smtime.csv", usage_data => {
     //             frame: {duration: 1000},
     //             transition:{duration: 500},
     //             fromcurrent: true, // is used to specify whether the animation should continue from the current frame or start from the beginning.
-    //             mode: "afterall" // When mode is set to 'next', Plotly will advance the animation to the next frame in sequence
+    //             mode: "afterall"  //When mode is set to 'next', Plotly will advance the animation to the next frame in sequence
     //         }],
     //         method: 'animate'
-    //     },
-    //     {
-    //         label: 'Pause',
-    //         method: 'animate',
-    //         args: [null, {
-    //             frame: {duration: 0},
-    //             mode: "immediate", // When mode: 'immediate' is used, all frames between the current frame and the target frame are skipped, and the target frame is displayed immediately
-    //             transition:{duration: 0}
+    //         },
+    //         {
+    //             label: 'Pause',
+    //             method: 'animate',
+    //             args: [null, {
+    //                 frame: {duration: 0},
+    //                 mode: "immediate", //When mode: 'immediate' is used, all frames between the current frame and the target frame are skipped, and the target frame is displayed immediately
+    //                 transition:{duration: 0}
+    //             }],
     //         }],
-    //     }],
-    // }];
+    //  }];
 
-    // /*function frameUpdate(mode){
-    //     data.forEach(trace =>{
-    //         trace.mode = mode;
-    //     });
-    //     console.log("frameUpdate called with " + mode);
-    // } */
-
-    // var frames = [{
-    //         name: 'lines',
-    //         // traces: [0,1,2,3,4,5],
-    //         data: Array(data.length).fill({mode: 'lines'})
-    //     },
-    //     {
-    //         name: 'lines+markers',
-    //         // traces: [0,1,2],
-    //         data: Array(data.length).fill({mode: 'lines+markers'})
-    //     },
-    //     {
-    //         name: 'markers',
-    //         // traces: [0,1,2],
-    //         data: Array(data.length).fill({mode: 'markers'}) // specifies what will change
-    //     },
-
-    // ]
-
-    // var layout = {
-
-    //     //hover
-    //     hovermode: 'closest',
-    //     updatemenus: updatemenus,
-    //     hoverlabel: {
-    //         // bgcolor: "#FFF",
-    //         bordercolor: null,
-    //         font: {
-    //             family: 'Arial, monospace',
-    //             size: 14,
-    //             color: '#ffffff'
-    //         }
-    //     },
-
-    //     annotations: [
-    //         /* {
-    //             x: 1970,
-    //             y: 52.63183,
-    //             text: 'Annotation Text',
-    //             showarrow: true,
-    //             arrowhead: 7,
-    //             ax: 0,
-    //             ay: -40
-    //         } */
-            
-    //     ],
-
-    //     //slider
-    //     sliders:[{
-    //         pad:{t:30},
-    //         currentvalue:{
-    //             //specify the appearance and behaviour of sliders value level in here
-    //             font:{
-    //                 color:'#888',
-    //                 size: 20
-    //             }
-    //         },
-
-    //         steps:[{
-    //             label: "Lines",
-    //             method: "animate",
-    //             args:[["lines"],{
-    //                 mode: "immediate",
-    //                 transition:{duration:0}
-    //             }]
-    //         },
-    //         {
-    //             label: "Lines+Markers",
-    //             method: "animate",
-    //             args:[["lines+markers"],{
-    //                 mode: "immediate",
-    //                 transition:{duration:0}
-    //             }]
-    //         },
-    //         {
-    //             label: "Markers",
-    //             method: "animate",
-    //             args:[["markers"],{
-    //                 mode: "immediate",
-    //                 transition:{duration:0}
-    //             }]
-                
-    //         }]
-    //     }]
+    //  function frameUpdate(mode){
+    //      data.forEach(trace =>{
+    //          trace.mode = mode;
+    //      });
+    //      console.log("frameUpdate called with " + mode);
     // }
 
-    // Plotly.newPlot("usage",data,layout);
+    //  var frames = [{
+    //          name: 'lines',
+    //           traces: [0,1,2,3,4,5],
+    //          data: Array(data.length).fill({mode: 'lines'})
+    //      },
+    //      {
+    //          name: 'lines+markers',
+    //           traces: [0,1,2],
+    //          data: Array(data.length).fill({mode: 'lines+markers'})
+    //      },
+    //      {
+    //          name: 'markers',
+    //           traces: [0,1,2],
+    //          data: Array(data.length).fill({mode: 'markers'})  //specifies what will change
+    //      },
+
+    //  ]
+
+     var layout = {
+
+         //hover
+         hovermode: 'closest',
+        //  updatemenus: updatemenus,
+         hoverlabel: {
+            bgcolor: "#FFF",
+             bordercolor: null,
+             font: {
+                 family: 'Arial, monospace',
+                 size: 14,
+                 color: '#00000'
+             }
+         },
+
+         xaxis:{
+            dtick: 1,
+            title: 'Year'
+         },
+
+         yaxis:{
+            title: 'Average daily usage time (minutes)'
+         }
+
+         //slider
+        //  sliders:[{
+        //      pad:{t:30},
+        //      currentvalue:{
+        //          //specify the appearance and behaviour of sliders value level in here
+        //          font:{
+        //              color:'#888',
+        //              size: 20
+        //          }
+        //      },
+
+        //      steps:[{
+        //          label: "Lines",
+        //          method: "animate",
+        //          args:[["lines"],{
+        //              mode: "immediate",
+        //              transition:{duration:0}
+        //          }]
+        //      },
+        //      {
+        //          label: "Lines+Markers",
+        //          method: "animate",
+        //          args:[["lines+markers"],{
+        //              mode: "immediate",
+        //              transition:{duration:0}
+        //          }]
+        //      },
+        //      {
+        //          label: "Markers",
+        //          method: "animate",
+        //          args:[["markers"],{
+        //              mode: "immediate",
+        //              transition:{duration:0}
+        //          }]
+                
+        //      }]
+        //  }]
+     }
+
+     Plotly.newPlot("usage",data,layout);
 })
