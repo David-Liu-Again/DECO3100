@@ -75,7 +75,7 @@ Plotly.d3.csv("data/smadoption.csv", adoption_data => {
     data.forEach(trace => {
         trace.hovertemplate = "<b>Platform: </b>" + `${trace.name}<br>` //must use backtick
         + "<b>Age Group: </b>" + `%{y}<br>` 
-        + "<b>Adoption Rate: </b>" + `%{x} %<br>` ;
+        + "<b>Adoption Rate: </b>" + `%{x} %<br><extra></extra>` ;
         trace.type = "bar";
         trace.orientation = 'h';
         trace.visible = false; // set all to invisible by default

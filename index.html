@@ -1,7 +1,9 @@
 <head>
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 </head>
+
 <body>
     <header>
         <p>Header</p>
@@ -33,8 +35,47 @@
             <p>Lorem ipsum</p>
             
             <h2>Anxiety disorders and unhealthy social media behaviours by age</h2>
-            <!-- Graph 2B -->
-            <div id="habits"></div>
+
+            <!-- referenced https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio -->
+            <fieldset id="habit_buttonset">
+                <legend>Select an Age group</legend>
+              
+                <div>
+                  <input type="radio" id="habits_all_ages" name="habit_buttons" value= "-1" checked />
+                  <label for="habits_all_ages">All Ages</label>
+                </div>
+              
+                <div>
+                  <input type="radio" id="habits_16_24" name="habit_buttons" value="0" />
+                  <label for="habits_16_24">16-24</label>
+                </div>
+              
+                <div>
+                  <input type="radio" id="habits_25_34" name="habit_buttons" value="1" />
+                  <label for="habits_25_34">25-34</label>
+                </div>
+
+                <div>
+                    <input type="radio" id="habits_35_44" name="habit_buttons" value="2" />
+                    <label for="habits_35_44">35-44</label>
+                </div>
+                
+                <div>
+                    <input type="radio" id="habits_45_54" name="habit_buttons" value="3" />
+                    <label for="habits_45_54">45-54</label>
+                </div>
+
+                <div>
+                    <input type="radio" id="habits_55_64" name="habit_buttons" value="4" />
+                    <label for="habits_55_64">55-64</label>
+                </div>
+            </fieldset>
+            
+            
+            <!-- Graphs 2B -->
+            <div id="habits_celeb"></div>
+            <div id="habits_anxiety"></div>
+            <div id="habits_fomo"></div>
             <p>Lorem ipsum</p>  
         </section>
         

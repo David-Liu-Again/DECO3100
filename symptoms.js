@@ -64,7 +64,7 @@ Plotly.d3.csv("data/smanxiety.csv", all_data => {
     // Data setup
     data.forEach(trace => {
         trace.hovertemplate = "<b>Anxiety Type: </b>" + `${trace.name}<br>` //must use backtick
-        + "<b>Score: </b>" + `%{y} %<br>` 
+        + "<b>Score: </b>" + `%{y} %<br><extra></extra>` 
         trace.mode = "lines+markers";
         //trace.visible = false; // set all to invisible by default
     })
