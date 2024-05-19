@@ -184,7 +184,7 @@ Plotly.d3.csv("data/smadoption.csv", adoption_data => {
             tick0: 0,
             dtick: 1,
             tickwidth: 0,
-            range: [0.5, 6],
+            range: [-0.5, 6],
             fixedrange: true
         },
 

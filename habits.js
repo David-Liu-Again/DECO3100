@@ -1,5 +1,6 @@
 // establishing global variables containing csv data
 var age, anxiety, celebrity, fomo, anxietyChart, celebrityChart,fomoChart;
+let radialColours = ['#1ab7ea', '#0084ff', '#39539E', '#0077B5'];
 
 Plotly.d3.csv("data/smhabits.csv", habit_data => {
     //Unpack all coloumns
@@ -10,17 +11,17 @@ Plotly.d3.csv("data/smhabits.csv", habit_data => {
     
     //Initialise Graphs
     //Chart 1: Celebrity Followers
-    celebrityChart = generateComboGraph(celebrity, age,"#habits_celeb" , "Celebrity Followers");
+    celebrityChart = generateRadialGraph(celebrity, age,"#habits_celeb" , "Celebrity Followers");
     celebrityChart.render();
     //Chart 2: Prevalance of anxiety disorders
-    anxietyChart = generateComboGraph(anxiety, age, "#habits_anxiety", "Prevalance of anxiety disorders");
+    anxietyChart = generateRadialGraph(anxiety, age, "#habits_anxiety", "Prevalance of anxiety disorders");
     anxietyChart.render();
     // //Chart 3: Fear of Missing Out
-    fomoChart = generateComboGraph(fomo, age, "#habits_fomo", "Fear of Missing Out");
+    fomoChart = generateRadialGraph(fomo, age, "#habits_fomo", "Fear of Missing Out");
     fomoChart.render()
 });
 
-function generateComboGraph(values, ages, graphid, title){
+function generateRadialGraph(values, ages, graphid, title){
     // Values = the percentages displayed on the radial graph
     
     // graph id  = The id tag on the div to be turned into a graph
@@ -80,7 +81,7 @@ function generateComboGraph(values, ages, graphid, title){
             color:  '#263238'
             },
         },
-        colors: ['#1ab7ea', '#0084ff', '#39539E', '#0077B5'],
+        colors: radialColours,
         responsive: [{
             breakpoint: 480,
             options: {
@@ -115,6 +116,7 @@ function updateGraphs(ageBracket = -1){
         let anxiety_values = [];
         let fomo_values = [];
         let age_values = [];
+        let colour_values = [];
         
         
         if (ageBracket == -1){
@@ -124,6 +126,7 @@ function updateGraphs(ageBracket = -1){
             anxiety_values = anxiety;
             fomo_values = fomo;
             age_values = age;
+            colour_values = radialColours
         } else{
             // age Bracket is 0,1,2,3 or4
             // only 1 age bracket is displayed
@@ -131,6 +134,7 @@ function updateGraphs(ageBracket = -1){
             anxiety_values.push(anxiety[ageBracket]);
             fomo_values.push(fomo[ageBracket]);
             age_values.push(age[ageBracket]);
+            colour_values.push(radialColours[ageBracket]);
         }
         console.log(celebrity_values);
         console.log(anxiety_values);
@@ -140,7 +144,8 @@ function updateGraphs(ageBracket = -1){
         //Chart 1: Celebrity Followers
         celebrityChart.updateOptions({
                 series: celebrity_values,
-                labels: age_values
+                labels: age_values,
+                colors: colour_values
             }, 
             false, true);
 
@@ -161,11 +166,11 @@ function updateGraphs(ageBracket = -1){
 }
 
 // Retrieving an array contianing the buttons used to alter the graph data
-let buttonParent = document.querySelector("#habit_buttonset");
-let buttonArray = buttonParent.querySelectorAll("input"); // all buttons
-console.log(buttonArray);
+let habitFieldset = document.querySelector("#habit_buttonset");
+let habitRadioArray = habitFieldset.querySelectorAll("input"); // all buttons
+console.log(habitRadioArray);
 
-buttonArray.forEach(button =>{
+habitRadioArray.forEach(button =>{
     button.addEventListener("click", function(event) {
         let ageBracket = parseInt(button.getAttribute("value"));
         updateGraphs(ageBracket);

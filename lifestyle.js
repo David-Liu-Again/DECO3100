@@ -1,160 +1,174 @@
 // establishing global variables containing csv data
-var age, anxiety, celebrity, fomo, lifestyleChart;
+var currentGraphIndex = 0;
+var lifestyleChart;
+// var age, anxiety, celebrity, fomo, lifestyleChart;
 
-Plotly.d3.csv("data/smhabits.csv", habit_data => {
-    //Unpack all coloumns
-    age = unpack(habit_data, 'Age Group');
-    anxiety = unpack(habit_data, 'Anxiety').map(Number);
-    celebrity = unpack(habit_data, 'Celebrity').map(Number);
-    fomo = unpack(habit_data, 'FOMO').map(Number);
-    
-    //Initialise Graphs
-    //Chart 1: Celebrity Followers
-    
-        // Values = the percentages displayed on the radial graph
-    
-    // graph id  = The id tag on the div to be turned into a graph
-    // Title = The title of the graph to be displayed
+// Function to unpack the first column of the datasety
+const unpackFirst = (data) => data.map(row => Object.values(row)[0]);
 
-    /* Below is adapted from https://apexcharts.com/javascript-chart-demos/radialbar-charts/custom-angle-circle/ */
-    
-       
+// initalise empty array to hold the graph data
+let fileNames = [
+    "friends.csv",
+    "family.csv",
+    "humanitarian.csv",
+    "religious.csv",
+    "sport.csv",
+    "union.csv"
+]
+let database = [null,null,null,null,null,null]
+let graphTitles = [
+    "The Importance of Friends",
+    "The Importance of Family",
+    "The Importance of Humanitarian Volunteering",
+    "The Importance of Religious Volunteering",
+    "The Importance of Sport Volunteering",
+    "The Importance of Union Membership"
+]
+
+// Initialise a dataless graph
+// on click
+// Update the "current graph" index in the backend and frontend
+// For each graph
+// Update the graph to display the data
+
+// Used chatGPT to assist with writing a callback function and dealing with asynchronicity
+
+function unpackCSV(index, callback){
+    // unpack the data if it hasn't been done already
+    Plotly.d3.csv("data/lifestyle/" + fileNames[index], life_data => {
+        let independentVar = unpackFirst(life_data);
+        // Unpack all columns
+        let health = unpack(life_data, 'health').map(Number);
+        let lifeSatisfaction = unpack(life_data, 'life satisfaction').map(Number);
+        
+        let newGraphData = [independentVar, health, lifeSatisfaction];
+        
+        if (database[index] != null) {
+            throw new Error('Attempting to overwrite database');
+        }
+
+        database[index] = newGraphData;
+
+        // Call the callback function after the database has been updated
+        if (callback) {
+            callback(newGraphData);
+        }
+    });
+}
+
+
+// Initialise default data to be displayed to the user
+unpackCSV(currentGraphIndex, (newGraphData) => {
+    console.log('New graph data:', newGraphData);
+    console.log('Database:', database);
+
     var options = {
-        series: values,
-        labels: ages,
+        series: [{
+                name: 'Health',
+                type: 'column',
+                data: newGraphData[1],
+            }, {
+                name: 'Life Satisfaction',
+                type: 'column',
+                data: newGraphData[2],
+            }],
         chart: {
-            height: 390,
-            type: 'radialBar',
+            height: 350,
+            type: 'line',
         },
-        plotOptions: {
-            radialBar: {
-                offsetY: 0,
-                startAngle: 0,
-                endAngle: 270,
-                hollow: {
-                    margin: 5,
-                    size: '30%',
-                    background: 'transparent',
-                    image: undefined,
-                },
-                dataLabels: {
-                    name: {
-                        show: true,
-                    },
-                    value: {
-                        show: true,
-                    }
-                },
-                barLabels: {
-                    enabled: true,
-                    useSeriesColors: true,
-                    margin: 8,
-                    fontSize: '16px',
-                    formatter: function(seriesName, opts) {
-                        return seriesName + ":  " + roundToOne(opts.w.globals.series[opts.seriesIndex]) +"%"
-                    },
-                },
-            }
+        stroke: {
+            width: [0, 4]
         },
+        colors: ['#1ab7ea',  '#FFA07A',],
         title: {
-            text: title,
-            align: 'left',
-            margin: 10,
-            offsetX: 0,
-            offsetY: 0,
-            floating: false,
-            style: {
-            fontSize:  '14px',
-            fontWeight:  'bold',
-            fontFamily:  'Roboto',
-            color:  '#263238'
-            },
+            //Update this
+            text: graphTitles[currentGraphIndex]
         },
-        colors: ['#1ab7ea', '#0084ff', '#39539E', '#0077B5'],
-        responsive: [{
-            breakpoint: 480,
-            options: {
-            legend: {
-                show: false
+        dataLabels: {
+            enabled: false,
+            //enabledOnSeries: [1]
+        },
+        labels: newGraphData[0],
+        xaxis: {
+            //type: 'datetime'
+        },
+        yaxis: {
+            title: {
+                text: 'Health and Life Satisfaction (%)',
+            },
+            stepSize: 20,
+            min:0,
+            max: 80,
+            decimalsInFloat:0
+        },
+        tooltip: {
+            shared:false,
+            y: {
+            formatter: function(value) {
+                return roundToOne(value) + "%"
             }
-            }
-        }]
+            },
+        }
     };
 
-    lifestyleChart =  new ApexCharts(document.querySelector(graphid), options);
-
+    lifestyleChart = new ApexCharts(document.querySelector("#lifestyle"), options);
     lifestyleChart.render();
-
 });
 
 
-function updateComboGraph(graphNumber = -1){
-        // This displays the three radial graphs and is called when a age group button is clicked or when the page is loaded
-        // AgeBracket is an integer that indicates which age bracket is to be displayed
-        // -1 = All age groups
-        // 0 = 16-24
-        // 1 = 25-34
-        // 2 = 35-44
-        // 3 = 45-54
-        // 4 = 55-64
+function updateComboGraph(newGraphNumber){
+        // This displays the lifestyle graphs and is called when a lifestyle button is clicked
+        // GraphNumber indicates which graph to be dislpayed
+        //Possible Values
+        // 0 = Importance of Family
+        // 1 = Importance of Friends
+        // 2 = Importance of Humanitarian Volunteering
+        // 3 = Importance of Religious Volunteering
+        // 4 = Importance of Sport Volunteering
+        // 5 = The Importance of Union Membership
+        let newGraphData;
+        
+        currentGraphIndex = newGraphNumber;
 
-        // temporary variables to hold the data that will be displayed
-        let celebrity_values = [];
-        let anxiety_values = [];
-        let fomo_values = [];
-        let age_values = [];
-        
-        
-        if (graphNumber == -1){
-            // All Ages (the default value)
-            // all data is displayed
-            celebrity_values = celebrity;
-            anxiety_values = anxiety;
-            fomo_values = fomo;
-            age_values = age;
+        //Display the new data
+        if (database[currentGraphIndex] == null){
+            //unpack the csv data if this is the first instance of it being displayed
+            unpackCSV(currentGraphIndex, (newGraphData) => {
+                displayNewData(newGraphData);
+            });
         } else{
-            // age Bracket is 0,1,2,3 or4
-            // only 1 age bracket is displayed
-            celebrity_values.push(celebrity[graphNumber]);
-            anxiety_values.push(anxiety[graphNumber]);
-            fomo_values.push(fomo[graphNumber]);
-            age_values.push(age[graphNumber]);
+            //Data has already been unpacked, so we just fetch it and display it
+            newGraphData = database[currentGraphIndex];
+            displayNewData(newGraphData);
         }
-        console.log(celebrity_values);
-        console.log(anxiety_values);
-        console.log(fomo_values);
-        console.log(age_values);
 
-        //Chart 1: Celebrity Followers
-        celebrityChart.updateOptions({
-                series: celebrity_values,
-                labels: age_values
-            }, 
-            false, true);
-
-        //Chart 2: Prevalance of anxiety disorders
-        anxietyChart.updateOptions({
-                series: anxiety_values,
-                labels: age_values
-            }, 
-            false, true);
-
-        // //Chart 3: Fear of Missing Out
-        fomoChart.updateOptions({
-                series: fomo_values,
-                labels: age_values
-            }, 
-            false, true);
-
+        //update back and forward buttons
 }
 
-// Retrieving an array contianing the buttons used to alter the graph data
-let buttonParent = document.querySelector("#habit_buttonset");
-let buttonArray = buttonParent.querySelectorAll("input"); // all buttons
-console.log(buttonArray);
+function displayNewData(newGraphData){
+    console.log("New graph data: ", newGraphData);
+    lifestyleChart.updateOptions({
+        series: [{
+            data: newGraphData[1],
+        }, {
+            data: newGraphData[2],
+        }],
+        labels: newGraphData[0],
+        title: {
+            text: graphTitles[currentGraphIndex]
+        },
+    }, 
+    false, true);
+}
 
-buttonArray.forEach(button =>{
+// // Retrieving an array contianing the buttons used to alter the graph data
+let lifestyleFieldset = document.querySelector("#lifestyle_buttonset");
+let lifestyleRadioArray = lifestyleFieldset.querySelectorAll("input"); // all buttons
+console.log(lifestyleRadioArray);
+
+lifestyleRadioArray.forEach(button =>{
     button.addEventListener("click", function(event) {
+        console.log(button.name, button.value);
         let ageBracket = parseInt(button.getAttribute("value"));
         updateComboGraph(ageBracket);
     });

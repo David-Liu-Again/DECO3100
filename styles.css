@@ -4,10 +4,22 @@
     background-color: aqua;
 } */
 
+body{
+  font-size: 12px;
+}
+
+header h1{
+  font-size: 3rem;
+}
+
 form{
     width: 1000px;
     height: 100px;
     background-color: yellow;
+}
+
+img{
+  max-width: 90%;
 }
 
 
@@ -18,7 +30,26 @@ body {
   font-family: Roboto, sans-serif;
 }
 
-#chart {
-  max-width: 650px;
-  margin: 35px auto;
+#links div {
+  display: flex;
+  width: 100%;
+  height: 100%; 
+  gap: 10px;
+  height: fit-content;
+}
+
+#links div > article {
+  flex: 1; 
+  display: flex;
+  justify-content: center; /* Optional: Center content horizontally */
+  align-items: center; /* Optional: Center content vertically */
+  border: 1px solid black;
+  flex-direction: column;
+  height: 100%;
+}
+
+#links div > article > a{
+  width: 100%;
+  height: 100%; 
+  border: 1px solid black;
 }
