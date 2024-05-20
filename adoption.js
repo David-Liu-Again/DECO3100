@@ -70,7 +70,6 @@ Plotly.d3.csv("data/smadoption.csv", adoption_data => {
     }
 
     var data = [traceAny, traceFacebook, traceInsta, traceTiktok, traceTwitter, traceYoutube];
-
     // Data setup
     data.forEach(trace => {
         trace.hovertemplate = "<b>Platform: </b>" + `${trace.name}<br>` //must use backtick
@@ -159,6 +158,8 @@ Plotly.d3.csv("data/smadoption.csv", adoption_data => {
     ]
 
      var layout = {
+        paper_bgcolor: 'rgba(0,0,0,0)',
+        plot_bgcolor: 'rgba(0,0,0,0)',
         //hover
         hovermode: 'closest',
         updatemenus: updatemenus,

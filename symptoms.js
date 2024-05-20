@@ -3,9 +3,6 @@
 
 Plotly.d3.csv("data/smanxiety.csv", all_data => {
     //Unpack all coloumns
-    //Frequency SM Use (1 = Once a week or less, 2 = Several 
-    //times a week, 3 = About 1-4 times per day, 4 = About 
-    //5-10 times per day,  5 = More than 10 times a day,  6 = Constantly)
     
     const anxiety_data = all_data.slice(0,6);
     console.log(anxiety_data);
@@ -30,6 +27,7 @@ Plotly.d3.csv("data/smanxiety.csv", all_data => {
         marker: {
             color: 'rgba(0,0,255,0.6)'
         },
+        visible: true
     }
 
     var traceSocial = {
@@ -39,6 +37,7 @@ Plotly.d3.csv("data/smanxiety.csv", all_data => {
         marker: {
             color: 'rgba(0,50,255,0.6)'
         },
+        visible: false
     }
 
     var traceSeperation = {
@@ -48,6 +47,7 @@ Plotly.d3.csv("data/smanxiety.csv", all_data => {
         marker: {
             color: 'rgba(50,50,255,0.6)'
         },
+        visible: false
     }
 
     var traceOCD = {
@@ -57,6 +57,7 @@ Plotly.d3.csv("data/smanxiety.csv", all_data => {
         marker: {
             color: 'rgba(0,100,255,0.6)'
         },
+        visible: false
     }
 
     var data = [traceAnxiety, traceSocial, traceSeperation, traceOCD];
@@ -118,7 +119,8 @@ Plotly.d3.csv("data/smanxiety.csv", all_data => {
             opacity: 0.5,
             line: {
                 width: 0
-            }
+            },
+            zindex: -1
         };
 
         return [averageLine,sdRect]
@@ -190,6 +192,8 @@ Plotly.d3.csv("data/smanxiety.csv", all_data => {
     // ]
 
     var layout = {
+        paper_bgcolor: 'rgba(0,0,0,0)',
+        plot_bgcolor: 'rgba(0,0,0,0)',
         //hover
         hovermode: 'closest',
         updatemenus: updatemenus,
@@ -203,13 +207,16 @@ Plotly.d3.csv("data/smanxiety.csv", all_data => {
                 color: '#00000'
             }
         },
-
+        shapes: createShapes("Total Anxiety"),
         xaxis:{
             title: 'Frequency of Social Media Use ',
             fixedrange: true,
             tickmode: "array",
-            tickvals: [1,3,6],
-            ticktext: ['Once a week or less', '1-4 times per day', 'Constantly']
+            tickvals: [1,2,3,4,5,6],
+            ticktext: ['Once a week or less', 'Several times a week', '1-4 times per day','5-10 times per day', 'Over 10 times per day', 'Constantly']
+            //Frequency SM Use (1 = Once a week or less, 2 = Several 
+            //times a week, 3 = About 1-4 times per day, 4 = About 
+            //5-10 times per day,  5 = More than 10 times a day,  6 = Constantly)
         },
 
         yaxis:{
@@ -227,7 +234,7 @@ Plotly.d3.csv("data/smanxiety.csv", all_data => {
         },
 
         title: {
-            text:'All Anxiety Types',
+            text:'Overall Anxiety',
             font: {
                 family: 'Arial',
                 size: 24

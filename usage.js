@@ -141,7 +141,8 @@ Plotly.d3.csv("data/smtime.csv", usage_data => {
     //  ]
 
      var layout = {
-
+        paper_bgcolor: 'rgba(0,0,0,0)',
+        plot_bgcolor: 'rgba(0,0,0,0)',
          //hover
          hovermode: 'closest',
         //  updatemenus: updatemenus,
