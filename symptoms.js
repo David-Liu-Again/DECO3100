@@ -14,10 +14,13 @@ Plotly.d3.csv("data/smanxiety.csv", all_data => {
     const ocd = unpack(all_data, 'OCD');
 
     const averages = all_data[6];
-    console.log(averages);
+    // console.log(averages);
     // console.log(averages['Social Anxiety']);
     const standardDevs = all_data[7];
-    console.log(standardDevs);
+    // console.log(standardDevs);
+
+    // Array containing descriptive text about each anxiety condition, to be displayed below the graph itself    
+    const anxietyDescriptions= ["AnxietyAll","Anxiety1","Anxiety2","Anxiety3"]
 
 
     var traceAnxiety = {
