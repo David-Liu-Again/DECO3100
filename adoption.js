@@ -142,7 +142,13 @@ Plotly.d3.csv("data/smadoption.csv", adoption_data => {
             xanchor: 'left',
             y: 1,
             yanchor: 'top',
-            active: 1
+            active: 1,
+            bgcolor: "#FFFFFF",
+            font: {
+                family: 'Arial',
+                size: 18,
+                color: '#000000'
+            }
         }
     ]
 
@@ -168,8 +174,8 @@ Plotly.d3.csv("data/smadoption.csv", adoption_data => {
             bgcolor: "#FFF",
             bordercolor: null,
             font: {
-                family: 'Arial, monospace',
-                size: 14,
+                family: 'Arial',
+                size: 18,
                 color: '#00000'
             }
         },
@@ -200,6 +206,12 @@ Plotly.d3.csv("data/smadoption.csv", adoption_data => {
                 size: 24
             },
             y: 0.85
+        },
+
+        font: {
+            family: 'Arial',
+            size: 18,
+            color: '#FFFFFF'
         }
     }
 

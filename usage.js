@@ -173,7 +173,15 @@ Plotly.d3.csv("data/smtime.csv", usage_data => {
          margin:{
             pad:0,
             t:20
-         }
+         },
+
+         autosize: true,
+         automargin: true,
+         font: {
+            family: 'Arial',
+            size: 18,
+            color: '#FFFFFF'
+        }
 
          //slider
         //  sliders:[{

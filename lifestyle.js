@@ -75,6 +75,7 @@ unpackCSV(currentGraphIndex, (newGraphData) => {
         chart: {
             height: 350,
             type: 'line',
+            foreColor: '#FFFFFF'
         },
         stroke: {
             width: [0, 4]
@@ -82,7 +83,13 @@ unpackCSV(currentGraphIndex, (newGraphData) => {
         colors: ['#1ab7ea',  '#FFA07A',],
         title: {
             //Update this
-            text: graphTitles[currentGraphIndex]
+            text: graphTitles[currentGraphIndex],
+            style: {
+                fontSize:  '14px',
+                fontWeight:  'bold',
+                fontFamily:  'Roboto',
+                color:  '#FFFFFF'
+            },
         },
         dataLabels: {
             enabled: false,
@@ -103,10 +110,18 @@ unpackCSV(currentGraphIndex, (newGraphData) => {
         },
         tooltip: {
             shared:false,
+            theme:  'dark',
             y: {
-            formatter: function(value) {
-                return roundToOne(value) + "%"
-            }
+                formatter: function(value) {
+                    return roundToOne(value) + "%"
+                },
+                
+            },
+            style: {
+                fontSize:  '14px',
+                fontWeight:  'bold',
+                fontFamily:  'Roboto',
+                color:  '#000000'
             },
         }
     };

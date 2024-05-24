@@ -36,6 +36,7 @@ function generateRadialGraph(values, ages, graphid, title){
         chart: {
             height: 390,
             type: 'radialBar',
+            foreColor: '#FFFFFF'
         },
         plotOptions: {
             radialBar: {
@@ -75,10 +76,10 @@ function generateRadialGraph(values, ages, graphid, title){
             offsetY: 0,
             floating: false,
             style: {
-            fontSize:  '14px',
-            fontWeight:  'bold',
-            fontFamily:  'Roboto',
-            color:  '#263238'
+                fontSize:  '14px',
+                fontWeight:  'bold',
+                fontFamily:  'Roboto',
+                color:  '#FFFFFF'
             },
         },
         colors: radialColours,
@@ -89,7 +90,12 @@ function generateRadialGraph(values, ages, graphid, title){
                 show: false
             }
             }
-        }]
+        }],
+                    font: {
+                family: 'Arial',
+                size: 18,
+                color: '#00000'
+            }
     };
 
     return new ApexCharts(document.querySelector(graphid), options);

@@ -179,7 +179,13 @@ Plotly.d3.csv("data/smanxiety.csv", all_data => {
             xanchor: 'left',
             y: 1,
             yanchor: 'top',
-            active: 1
+            active: 1,
+            font: {
+                family: 'Arial',
+                size: 18,
+                color: '#000000'
+            },
+            bgcolor: "#FFFFFF"
         }
     ]
 
@@ -243,6 +249,11 @@ Plotly.d3.csv("data/smanxiety.csv", all_data => {
                 size: 24
             },
             y: 0.85
+        },
+        font: {
+            family: 'Arial',
+            size: 18,
+            color: '#FFFFFF'
         }
     }
 
