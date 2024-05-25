@@ -24,43 +24,59 @@ Plotly.d3.csv("data/smanxiety.csv", all_data => {
 
 
     var traceAnxiety = {
+        mode: 'lines+markers',
         x: frequency,
         y: anxiety,
         name: 'Overall Anxiety',
         marker: {
-            color: 'rgba(0,0,255,0.6)'
+            color: 'RGB(123, 160, 255)'
         },
-        visible: true
+        visible: true,
+        line:{
+            width: 3
+        }
     }
 
     var traceSocial = {
+        mode: 'lines+markers',
         x: frequency,
         y: social,
         name: 'Social Anxiety',
         marker: {
-            color: 'rgba(0,50,255,0.6)'
+            color: 'RGB(255, 85, 85)'
         },
-        visible: false
+        visible: false,
+        line:{
+            width: 3
+        }
     }
 
     var traceSeperation = {
+        mode: 'lines+markers',
         x: frequency,
         y: seperation,
         name: 'Seperation Anxiety',
         marker: {
-            color: 'rgba(50,50,255,0.6)'
+            color: 'RGB(200, 150, 255)'
         },
-        visible: false
+        visible: false,
+        line:{
+            width: 3
+        }
     }
 
     var traceOCD = {
+        mode: 'lines+markers',
         x: frequency,
         y: ocd,
         name: 'OCD',
         marker: {
-            color: 'rgba(0,100,255,0.6)'
+            color: 'RGB(255, 215, 0)'
         },
-        visible: false
+        visible: false,
+        line:{
+            width: 3
+        }
     }
 
     var data = [traceAnxiety, traceSocial, traceSeperation, traceOCD];
@@ -70,6 +86,8 @@ Plotly.d3.csv("data/smanxiety.csv", all_data => {
         trace.hovertemplate = "<b>Anxiety Type: </b>" + `${trace.name}<br>` //must use backtick
         + "<b>Score: </b>" + `%{y} %<br><extra></extra>` 
         trace.mode = "lines+markers";
+        trace.marker.size = 8;
+        // trace.line.width = 3;
         //trace.visible = false; // set all to invisible by default
     })
 
@@ -119,7 +137,7 @@ Plotly.d3.csv("data/smanxiety.csv", all_data => {
             x1: 1,
             y1: upperBound,
             fillcolor: '#d3d3d3',
-            opacity: 0.5,
+            opacity: 0.2,
             line: {
                 width: 0
             },
@@ -136,6 +154,10 @@ Plotly.d3.csv("data/smanxiety.csv", all_data => {
                 {
                     args: [{'visible': [true, true, true, true]},
                     {'title': 'All Anxiety Types',
+                    'yaxis': {'title': 'Anxiety Level (%)',
+                    'range': '[0, 100]',
+                    'fixedrange': 'true'
+                    },
                      'shapes': []
                     }],
                     label: 'All',
@@ -144,6 +166,7 @@ Plotly.d3.csv("data/smanxiety.csv", all_data => {
                 {
                     args: [{'visible': [true, false, false, false]},
                     {'title': 'Overall Anxiety',
+                    'yaxis': {'title': 'Overall Anxiety Level (%)'},
                     'shapes' : createShapes("Total Anxiety")
                     }],
                     label: 'Overall Anxiety',
@@ -152,6 +175,7 @@ Plotly.d3.csv("data/smanxiety.csv", all_data => {
                 {
                     args: [{'visible': [false, true, false, false]},
                     {'title': 'Social Anxiety',
+                    'yaxis': {'title': 'Social Anxiety Level (%)'},
                     'shapes' : createShapes("Social Anxiety")}],
                     label: 'Social',
                     method: 'update'
@@ -159,6 +183,7 @@ Plotly.d3.csv("data/smanxiety.csv", all_data => {
                 {
                     args: [{'visible': [false, false, true, false]},
                     {'title': 'Seperation Anxiety',
+                    'yaxis': {'title': 'Seperation Anxiety Level (%)'},
                     'shapes': createShapes("Seperation Anxiety")}],
                     label: 'Seperation',
                     method: 'update'
@@ -166,6 +191,7 @@ Plotly.d3.csv("data/smanxiety.csv", all_data => {
                 {
                     args: [{'visible': [false, false, false, true]},
                     {'title': 'OCD',
+                    'yaxis': {'title': 'OCD Level (%)'},
                     'shapes' : createShapes("OCD")}],
                     label: 'OCD',
                     method: 'update'
@@ -175,9 +201,9 @@ Plotly.d3.csv("data/smanxiety.csv", all_data => {
             pad: {'r': 0, 't': 0},
             showactive: true,
             type: 'buttons',
-            x: 0.15,
+            x: 0,
             xanchor: 'left',
-            y: 1,
+            y: 1.15,
             yanchor: 'top',
             active: 1,
             font: {
@@ -206,6 +232,17 @@ Plotly.d3.csv("data/smanxiety.csv", all_data => {
         //hover
         hovermode: 'closest',
         updatemenus: updatemenus,
+        scene:{
+            camera:{
+                eye:{
+                    x: 1,
+                    y:0.5,
+                    z: 1
+                }
+            }
+        },
+        uirevision:'true',
+        dragmode: false,
         // annotations: annotations,
         hoverlabel: {
             bgcolor: "#FFF",
@@ -238,6 +275,10 @@ Plotly.d3.csv("data/smanxiety.csv", all_data => {
             fixedrange: true
         },
 
+        xaxis:{
+            fixedrange:true
+        },
+
         margin:{
             t:10
         },
@@ -248,13 +289,18 @@ Plotly.d3.csv("data/smanxiety.csv", all_data => {
                 family: 'Arial',
                 size: 24
             },
-            y: 0.85
+            y: 0.935,
+            x: 0.5
         },
         font: {
             family: 'Arial',
             size: 18,
             color: '#FFFFFF'
-        }
+        },
+        autosize: true,
+        margin: {
+          t: 100,
+        },
     }
 
     Plotly.newPlot("symptoms",data,layout);

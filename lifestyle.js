@@ -117,6 +117,7 @@ unpackCSV(currentGraphIndex, (newGraphData) => {
                 },
                 
             },
+
             style: {
                 fontSize:  '14px',
                 fontWeight:  'bold',

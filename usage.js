@@ -21,7 +21,10 @@ Plotly.d3.csv("data/smtime.csv", usage_data => {
         x: year,
         y: global,
         name: 'Global',
-        mode: 'lines+markers'
+        mode: 'lines+markers',
+        marker: {
+            color: 'rgb(255, 105, 97)'
+        },
     }
 
 
@@ -30,6 +33,9 @@ Plotly.d3.csv("data/smtime.csv", usage_data => {
          y: la,
          name: 'Latin America',
          mode: 'lines+markers',
+         marker: {
+            color: 'rgb(255, 179, 71)'
+        },
         
     }
 
@@ -38,7 +44,9 @@ Plotly.d3.csv("data/smtime.csv", usage_data => {
         y: mea,
         name: 'Middle East & Africa',
         mode: 'lines+markers',
-    
+        marker: {
+            color: 'rgb(177, 156, 217)'
+        },
     }
 
     var traceAp = {
@@ -46,7 +54,9 @@ Plotly.d3.csv("data/smtime.csv", usage_data => {
             y: ap,
             name: 'Asia-Pacific',
             mode: 'lines+markers',
-        
+            marker: {
+                color: 'rgb(119, 221, 119)'
+            },
     }
 
     var traceNa = {
@@ -54,7 +64,9 @@ Plotly.d3.csv("data/smtime.csv", usage_data => {
         y: na,
         name: 'North America',
         mode: 'lines+markers',
-    
+        marker: {
+            color: 'rgb(159, 226, 191)',
+        },
     }
 
     var traceEu = {
@@ -62,7 +74,10 @@ Plotly.d3.csv("data/smtime.csv", usage_data => {
         y: eu,
         name: 'Europe',
         mode: 'lines+markers',
-    
+        marker: {
+            color: 'rgb(120, 160, 245)',
+            
+        },
     }
 
     var data = [traceGlobal, traceLa, traceMea, traceAp, traceNa, traceEu];
@@ -77,7 +92,7 @@ Plotly.d3.csv("data/smtime.csv", usage_data => {
         trace.customdata = trace.y.map(minutes => (Math.floor(minutes/60) + " hours " + minutes%60 + " minutes "));
         trace.hovertemplate = "<b>Region: </b>" + `${trace.name}<br>` //must use backtick
         + '<b>Year: </b>%{x}<br>' + '<b>Average Usage: %{customdata}<extra></extra>';
-
+        trace.marker.size = 8;
         // Convert y to hours
         trace.y = trace.y.map(minutes => minutes/60);
     })
@@ -167,13 +182,15 @@ Plotly.d3.csv("data/smtime.csv", usage_data => {
             tick0: 0,
             dtick: 1,
             tickwidth: 0,
-            range: [1, 4]
+            range: [0.9, 4],
+            fixedrange: true
          },
 
          margin:{
             pad:0,
             t:20
          },
+         
 
          autosize: true,
          automargin: true,

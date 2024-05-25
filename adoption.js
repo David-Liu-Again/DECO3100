@@ -16,7 +16,7 @@ Plotly.d3.csv("data/smadoption.csv", adoption_data => {
         x: any,
         name: 'Any Social Media',
         marker: {
-            color: 'rgba(0,0,255,0.6)'
+            color: 'RGB(255, 128, 0)'
         },
     }
 
@@ -26,7 +26,7 @@ Plotly.d3.csv("data/smadoption.csv", adoption_data => {
          x: facebook,
          name: 'Facebook',
          marker: {
-            color: 'rgba(0,100,255,0.6)'
+            color: 'rgb(0, 174, 239)'
         },
         
     }
@@ -36,7 +36,7 @@ Plotly.d3.csv("data/smadoption.csv", adoption_data => {
         x: instagram,
         name: 'Instagram',
         marker: {
-            color: 'rgba(100,0,255,0.6)'
+            color: 'RGB(255, 105, 180)'
         },
     
     }
@@ -46,17 +46,17 @@ Plotly.d3.csv("data/smadoption.csv", adoption_data => {
         x: tiktok,
         name: 'Tiktok',
         marker: {
-            color: 'rgba(100,100,255,0.6)'
+            color: 'RGB(128, 0, 255)'
         },
         
     }
-
+    
     var traceTwitter = {
         y: age,
         x: twitter,
         name: 'Twitter',
         marker: {
-            color: 'rgba(0,50,255,0.6)'
+            color: 'rgb(255, 195, 0)'
         },
     }
 
@@ -65,7 +65,7 @@ Plotly.d3.csv("data/smadoption.csv", adoption_data => {
         x: youtube,
         name: 'Youtube',
         marker: {
-            color: 'rgba(100,0,255,0.6)'
+            color: 'rgb(255, 85, 85)'
         },
     }
 

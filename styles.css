@@ -8,12 +8,17 @@
 
 
 /* FOUNDATIONAL STYLING */
-body {
+
+html {
   font-family: Roboto, sans-serif;
-  font-size: 20px;
+  font-size: 16px;
   background-color:  rgba(27,32,48);
   margin: 0;
   color: white;
+}
+
+p, li{
+  font-size: 1.25rem;
 }
 
 h1,h2,h3{
@@ -25,6 +30,8 @@ h1 strong{
 }
 
 /* TEXT AND IMAGE STYLING */
+
+
 .centred-text{
   width: 100%;
   display: flex;
@@ -49,6 +56,7 @@ img{
 /* LARGE AREA STYLING */
 header, section, footer{
   padding: 2rem;
+  height: fit-content;
 }
 
 .callout{
@@ -133,28 +141,64 @@ header h2{
   color:white;
 }
 
-
-  
-#links div {
-    display: flex;
-    width: 100%;
-  height: 100%; 
-  gap: 10px;
+footer{
+  background-color: rgb(51, 160, 255);
+  width: 100%;
   height: fit-content;
+  padding: 0.5rem;
+}
+  
+#resources, #habit_graph {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: fit-content;
+  gap: 1.5rem;
+
 }
 
-#links div > article {
-  flex: 1; 
+#resources > article, #habit_graph > div {
+  flex: 1;
+}
+
+#habit_graph > div:nth-child(2){
+  /* make the middle graph slightly bigger for empahsis */
+  flex: 1.8;
+}
+
+#resources > article >a { 
   display: flex;
-  justify-content: center; /* Optional: Center content horizontally */
+  justify-content: flex-start; /* Optional: Center content horizontally */
   align-items: center; /* Optional: Center content vertically */
   border: 1px solid black;
   flex-direction: column;
+  background-color: rgb(180, 242, 255);
+  color: rgb(0, 0, 0);
   height: 100%;
+  text-decoration: none;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  height: 21rem;
 }
 
-#links div > article > a{
-  width: 100%;
-  height: 100%; 
-  border: 1px solid black;
+#resources > article >a:hover{
+  background-color: rgb(154, 235, 252);
+}
+
+#resources > article > a > h4{
+  font-size: 2.44rem;
+  margin: 1rem;
+}
+
+#resources > article > a > p{
+  font-size: 1rem;
+}
+
+#resources > article > a > img{
+  height: 10rem;
+}
+
+#symptoms{
+  height: 40rem;
 }
