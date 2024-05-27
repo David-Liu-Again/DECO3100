@@ -75,8 +75,7 @@ Plotly.d3.csv("data/smtime.csv", usage_data => {
         name: 'Europe',
         mode: 'lines+markers',
         marker: {
-            color: 'rgb(120, 160, 245)',
-            
+            color: 'rgb(245, 160, 120)',
         },
     }
 

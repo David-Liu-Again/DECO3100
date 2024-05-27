@@ -143,7 +143,8 @@ Plotly.d3.csv("data/smadoption.csv", adoption_data => {
             y: 1,
             yanchor: 'top',
             active: 1,
-            bgcolor: "#FFFFFF",
+            activecolor: 'rgb(255, 165, 0)',
+            bgcolor: 'rgba(255, 255, 255, 0.5)', 
             font: {
                 family: 'Arial',
                 size: 18,
@@ -212,7 +213,7 @@ Plotly.d3.csv("data/smadoption.csv", adoption_data => {
             family: 'Arial',
             size: 18,
             color: '#FFFFFF'
-        }
+        },
     }
 
      Plotly.newPlot("adoption",data,layout);

@@ -17,6 +17,10 @@ html {
   color: white;
 }
 
+body{
+  margin: 0;
+}
+
 p, li{
   font-size: 1.25rem;
 }
@@ -49,7 +53,7 @@ section h1{
 }
 
 img{
-  max-width: 90%;
+  max-width: 100%;
 }
 
 
@@ -107,7 +111,7 @@ header:before{
   -webkit-transform: translateZ(0); backface-visibility: hidden;
   scale:(1.0, 1.0);
   transform: translateZ(0);
-  background:#1B2030 url('./header.png') 50% 0 no-repeat;
+  background:#1B2030 url('./images/header.png') 50% 0 no-repeat;
   background-size:100%;
   background-attachment:fixed;
   animation: grow 360s  linear 10ms infinite;
@@ -118,6 +122,10 @@ header:before{
 @keyframes grow{
   0% { transform: scale(1) translateY(0px)}
   50% { transform: scale(1.2) translateY(-50px)}
+}
+
+section > img{
+  margin-bottom: 2rem;
 }
 
 header h1{
@@ -201,4 +209,16 @@ footer{
 
 #symptoms{
   height: 40rem;
+}
+
+div #symptoms_description{
+  padding: 2rem 3rem;
+  background-color: rgba(143, 255, 255, 0.5);
+  color: rgb(255, 255, 255);
+  font-style: italic;
+  border-radius: 1rem;
+}
+
+div #symptoms_description li{
+  margin: 1rem 0;
 }

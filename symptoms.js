@@ -5,7 +5,7 @@ Plotly.d3.csv("data/smanxiety.csv", all_data => {
     //Unpack all coloumns
     
     const anxiety_data = all_data.slice(0,6);
-    console.log(anxiety_data);
+    // console.log(anxiety_data);
 
     const frequency = unpack(all_data, 'Frequency');
     const anxiety = unpack(all_data, 'Total Anxiety');
@@ -14,13 +14,48 @@ Plotly.d3.csv("data/smanxiety.csv", all_data => {
     const ocd = unpack(all_data, 'OCD');
 
     const averages = all_data[6];
-    // console.log(averages);
-    // console.log(averages['Social Anxiety']);
     const standardDevs = all_data[7];
-    // console.log(standardDevs);
-
     // Array containing descriptive text about each anxiety condition, to be displayed below the graph itself    
-    const anxietyDescriptions= ["AnxietyAll","Anxiety1","Anxiety2","Anxiety3"]
+    const anxietyDescriptions = [
+        `The results in these graphs are based on responses to <a href=”https://www.scaswebsite.com/portfolio/scas-child-overview/”>Spence Children's Anxiety Scale</a>.
+        Young people self-reported the intensity of common anxiety symptoms on a 4-point scale of frequency. 
+        `,
+        `The overall anxiety score rates the intensity of symptoms across six different types of anxiety. These include:<ul>
+        <li><a href="https://www.betterhealth.vic.gov.au/health/healthyliving/Generalised-anxiety-disorder">generalized anxiety disorder (GAD)</a></li>
+        <li><a href="https://www.betterhealth.vic.gov.au/health/conditionsandtreatments/social-phobia">social phobia (anxiety when socialising or performing)</a></li>
+        <li><a href="https://www.betterhealth.vic.gov.au/health/conditionsandtreatments/panic-disorder-and-agoraphobia">obsessive compulsive disorder (OCD)</a></li>
+        </ul>`,
+    `<a href="https://www.betterhealth.vic.gov.au/health/conditionsandtreatments/social-phobia">Social anxiety (social phobia)</a> is an anxiety disorder that affects 
+    you think and act in social situations. It is a constant and exaggerated fear of being judged or humiliated by other people and can cause you
+    to struggle in work, school and social life. The percentage scores above indicate the intensity of common social anxiety symptoms, such as:
+    <ul>
+        <li>Being afraid to take a test</li>
+        <li>Being afraid to use public toilets or bathrooms</li>
+        <li>Being afraid to present in front of your peers</li>
+    </ul>`,
+    `<a href="https://www.ncbi.nlm.nih.gov/books/NBK560793/#:~:text=Separation%20anxiety%20disorder%20(SAD)%20is,separation%20from%20an%20attachment%20figure.">Seperation anxiety disorder (SAD)</a> is an anxiety disorder wherein
+    somebody becomes excessively worried or concerned when a loved one leaves them alone. It can affect both adults and children. Children might be anxious about their parents or guardian leaving, whereas adults
+    might worry about their children, romantic partners or spouses.The percentage scores above indicate the intensity of common SAD symptoms, such as:
+    <ul>
+        <li>Being afraid of being home alone</li>
+        <li>Worrying about being away from my parents</li>
+        <li>Being scared of having to sleep on your own</li>
+    </ul>`,
+    `<a href="https://www.betterhealth.vic.gov.au/health/conditionsandtreatments/obsessive-compulsive-disorder">Obsessive compulsive disorder (OCD)</a> is an anxiety disorder wherein
+    somebody experiences recurring, intrusive thoughts or impulses (obsessions). They also repeat certain rituals to calm obsession-related fears (compulsions). 
+    However, the rituals are time-consuming and often reinforces the anxiety. People with OCD usually know that they act and think irrationally, but feel unable to control their urges.
+    The percentage scores above indicate the intensity of common OCD symptoms, such as:
+    <ul>
+        <li>Repeatedly checking that things are done right (e.g. checking the door is locked)</li>
+        <li>Thinking of special numbers or words to stop bad things from happening</li>
+        <li>Being bothered by distressing images in your mind</li>
+    </ul>
+    `
+    ];
+
+    
+    var annotationArray;
+
 
 
     var traceAnxiety = {
@@ -79,38 +114,66 @@ Plotly.d3.csv("data/smanxiety.csv", all_data => {
         }
     }
 
-    var data = [traceAnxiety, traceSocial, traceSeperation, traceOCD];
+    var botLeft = {
+        // Exists to stop graph from resizing itself
+        x: [1],
+        y: [0],
+        line: {color: 'rgbA(55, 128, 191,0)'},
+        marker: {
+            color: 'RGBA(255, 215, 0,0)'
+        },
+        hoverinfo:'skip',
+        visible:true,
+        showlegend: false
+    };
+
+    var topRight = {
+        // Exists to stop graph from resizing itself
+        x: [6],
+        y: [100],
+        mode: 'lines+markers',
+        line: {color: 'rgbA(55, 128, 191,0)'},
+        marker: {
+            color: 'RGBA(255, 215, 0,0)'
+        },
+        hoverinfo:'skip',
+        visible:true,
+        showlegend: false
+    }
+
+    // console.log(hoverShape);
+
+    var data = [traceAnxiety, traceSocial, traceSeperation, traceOCD,botLeft,topRight];
 
     // Data setup
-    data.forEach(trace => {
+    for(let trace of data){
+        if (trace === botLeft){
+            continue;
+        }
         trace.hovertemplate = "<b>Anxiety Type: </b>" + `${trace.name}<br>` //must use backtick
         + "<b>Score: </b>" + `%{y} %<br><extra></extra>` 
         trace.mode = "lines+markers";
         trace.marker.size = 8;
         // trace.line.width = 3;
         //trace.visible = false; // set all to invisible by default
-    })
-
-    // traceAnxiety.visible = true;
-
-    // console.log(data);
+    }
 
     function createShapes(traceType){
         // Get the average and standard deviation values for each anxiety type from data
         let average = averages[traceType];
-        console.log ("Average " + average);
+        // console.log ("Average " + average);
         let sd = standardDevs[traceType];
-        console.log ("Standard Dev " + sd);
+        // console.log ("Standard Dev " + sd);
         
         //Create a line object representing the average anxiety score
         let averageLine = {type: 'line',
-            xref: "paper",
-            x0: 0,
+            xref: "x",
+            x0: 1,
             y0: average,
-            x1: 1,
+            x1: 6,
             y1: average,
             line: {
-            color: 'rgb(55, 128, 191)',
+            color: 'rgb(155, 228, 255)',
             width: 3
             },
             label:{
@@ -121,30 +184,35 @@ Plotly.d3.csv("data/smanxiety.csv", all_data => {
 
         // Calculate what one standard deviation above and below the average is
         let lowerBound = Number(average) - Number(sd);
-        console.log(lowerBound);
         let upperBound = Number(average) + Number(sd);
-        console.log(upperBound);
 
-        //Create a rectangle object representing 1 standard deviation above/below the horizontal line
-        let sdRect = {
-            // rectangle line
-            type: 'rect',
-            // x-reference is assigned to the x-values
+        let label_y;
+        if (traceType =="Seperation Anxiety"){
+            // Place annotation below the line for the seperation anxiety graph, to prevent overlapping text
+            label_y = parseInt(average)-3;
+        }else{
+            label_y = parseInt(average)+3;
+        }
+        // console.log("label_y ",label_y)
+
+        let averageLabel = {
+            x: 0.055,
+            y: label_y,
             xref: 'paper',
-            // y-reference is assigned to the plot paper [0,1]
-            x0: 0,
-            y0: lowerBound,
-            x1: 1,
-            y1: upperBound,
-            fillcolor: '#d3d3d3',
-            opacity: 0.2,
-            line: {
-                width: 0
-            },
-            zindex: -1
+            yref: 'y',
+            text: 'Average',
+            showarrow: false,
+            font:{
+                color: 'rgb(155, 228, 255)',
+                size: '18px'
+            }
         };
 
-        return [averageLine,sdRect]
+
+
+        annotationArray = [averageLabel];
+
+        return [averageLine]
     }
 
     var updatemenus=[
@@ -152,47 +220,59 @@ Plotly.d3.csv("data/smanxiety.csv", all_data => {
             // Adapted from https://plotly.com/javascript/custom-buttons/#update-button
             buttons: [
                 {
-                    args: [{'visible': [true, true, true, true]},
+                    args: [{'visible': [true, true, true, true,true,true]},
                     {'title': 'All Anxiety Types',
-                    'yaxis': {'title': 'Anxiety Level (%)',
+                    'yaxis': {'title': 'Anxiety Level (%)'},
                     'range': '[0, 100]',
-                    'fixedrange': 'true'
-                    },
-                     'shapes': []
+                    'fixedrange': 'true',
+                    'shapes': [],
+                    'annotations': [],
+                    'showlegend': true
                     }],
                     label: 'All',
                     method: 'update',
                 },
                 {
-                    args: [{'visible': [true, false, false, false]},
+                    args: [{'visible': [true, false, false, false,true,true]},
                     {'title': 'Overall Anxiety',
                     'yaxis': {'title': 'Overall Anxiety Level (%)'},
-                    'shapes' : createShapes("Total Anxiety")
+                    'shapes' : createShapes("Total Anxiety"),
+                    'annotations': annotationArray,
+                    'showlegend': false
                     }],
                     label: 'Overall Anxiety',
                     method: 'update',
                 },
                 {
-                    args: [{'visible': [false, true, false, false]},
+                    args: [{'visible': [false, true, false, false,true,true]},
                     {'title': 'Social Anxiety',
                     'yaxis': {'title': 'Social Anxiety Level (%)'},
-                    'shapes' : createShapes("Social Anxiety")}],
+                    'shapes' : createShapes("Social Anxiety"),
+                    'annotations': annotationArray,
+                    'showlegend': false    
+                    }],
                     label: 'Social',
                     method: 'update'
                 },
                 {
-                    args: [{'visible': [false, false, true, false]},
+                    args: [{'visible': [false, false, true, false,true,true]},
                     {'title': 'Seperation Anxiety',
                     'yaxis': {'title': 'Seperation Anxiety Level (%)'},
-                    'shapes': createShapes("Seperation Anxiety")}],
+                    'shapes': createShapes("Seperation Anxiety"),
+                    'annotations': annotationArray,
+                    'showlegend': false
+                }],
                     label: 'Seperation',
                     method: 'update'
                 },
                 {
-                    args: [{'visible': [false, false, false, true]},
+                    args: [{'visible': [false, false, false, true,true,true]},
                     {'title': 'OCD',
                     'yaxis': {'title': 'OCD Level (%)'},
-                    'shapes' : createShapes("OCD")}],
+                    'shapes' : createShapes("OCD"),
+                    'annotations': annotationArray,
+                    'showlegend': false
+                }],
                     label: 'OCD',
                     method: 'update'
                 },
@@ -209,22 +289,14 @@ Plotly.d3.csv("data/smanxiety.csv", all_data => {
             font: {
                 family: 'Arial',
                 size: 18,
-                color: '#000000'
+                color: '#000000',
+                type: "bold"
             },
-            bgcolor: "#FFFFFF"
+            activecolor: 'rgb(255, 165, 0)', 
+            bgcolor: 'rgba(255, 255, 255, 0.5)'
         }
     ]
 
-    // var annotations = [
-    //     {
-    //       text: 'Platform:',
-    //       x: 0.05,
-    //       y: 1.085,
-    //       yref: 'paper',
-    //       align: 'left',
-    //       showarrow: false
-    //     }
-    // ]
 
     var layout = {
         paper_bgcolor: 'rgba(0,0,0,0)',
@@ -257,6 +329,8 @@ Plotly.d3.csv("data/smanxiety.csv", all_data => {
         xaxis:{
             title: 'Frequency of Social Media Use ',
             fixedrange: true,
+            gridcolor: 'rgba(200, 200, 200, 0.4)', 
+            gridwidth: 1,
             tickmode: "array",
             tickvals: [1,2,3,4,5,6],
             ticktext: ['Once a week or less', 'Several times a week', '1-4 times per day','5-10 times per day', 'Over 10 times per day', 'Constantly']
@@ -268,6 +342,8 @@ Plotly.d3.csv("data/smanxiety.csv", all_data => {
         yaxis:{
             title: 'Anxiety Score (%)',
             tickmode: "linear",
+            gridcolor: 'rgba(200, 200, 200, 0.4)', 
+            gridwidth: 1,
             tick0: 0,
             dtick: 20,
             tickwidth: 0,
@@ -301,7 +377,26 @@ Plotly.d3.csv("data/smanxiety.csv", all_data => {
         margin: {
           t: 100,
         },
+        annotations: annotationArray,
+        showlegend: false
+
     }
 
-    Plotly.newPlot("symptoms",data,layout);
-})
+    Plotly.newPlot("symptoms",data,layout).then(function(){
+        var myGraph = document.getElementById('symptoms');
+        var buttons = myGraph.querySelectorAll(".updatemenu-button");
+
+        var graphDescription= document.getElementById('symptoms_description');
+        graphDescription.innerHTML = anxietyDescriptions[1];
+
+        for (let i = 0; i < buttons.length; i++) {
+            buttons[i].addEventListener("click", function(){
+                graphDescription.innerHTML = anxietyDescriptions[i];
+            })
+        }
+        // myGraph.on('plotly_restyle', function(eventData) {
+        //     console.log('Relayout event data:', eventData);
+        // });
+    });
+
+});
