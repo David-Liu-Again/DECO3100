@@ -333,7 +333,11 @@ Plotly.d3.csv("data/smanxiety.csv", all_data => {
             gridwidth: 1,
             tickmode: "array",
             tickvals: [1,2,3,4,5,6],
-            ticktext: ['Once a week or less', 'Several times a week', '1-4 times per day','5-10 times per day', 'Over 10 times per day', 'Constantly']
+            fixedrange:true,
+            ticktext: ['Once a week or less', 'Several times a week', '1-4 times per day','5-10 times per day', 'Over 10 times per day', 'Constantly'],
+            tickfont:{
+                size: 12
+            }
             //Frequency SM Use (1 = Once a week or less, 2 = Several 
             //times a week, 3 = About 1-4 times per day, 4 = About 
             //5-10 times per day,  5 = More than 10 times a day,  6 = Constantly)
@@ -349,10 +353,6 @@ Plotly.d3.csv("data/smanxiety.csv", all_data => {
             tickwidth: 0,
             range: [0, 100],
             fixedrange: true
-        },
-
-        xaxis:{
-            fixedrange:true
         },
 
         margin:{
