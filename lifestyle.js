@@ -1,7 +1,6 @@
 // establishing global variables containing csv data
 var currentGraphIndex = 0;
 var lifestyleChart;
-// var age, anxiety, celebrity, fomo, lifestyleChart;
 
 // Function to unpack the first column of the datasety
 const unpackFirst = (data) => data.map(row => Object.values(row)[0]);
@@ -22,8 +21,6 @@ let graphTitles = [
 // Update the "current graph" index in the backend and frontend
 // For each graph
 // Update the graph to display the data
-
-// Used chatGPT to assist with writing a callback function and dealing with asynchronicity
 
 function unpackCSV(index, callback){
     // unpack the data if it hasn't been done already

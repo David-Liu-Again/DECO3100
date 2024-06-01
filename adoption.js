@@ -1,25 +1,11 @@
-//Below line taken from Week 8 tutorial slides
-//const unpack = (data, key) => data.map(row => row[key]);
-
 Plotly.d3.csv("data/smadoption.csv", adoption_data => {
-    //Unpack all coloumns
+    //Unpack all columns
     const age = unpack(adoption_data, 'Age');
-    // const any = unpack(adoption_data, 'Any');
     const facebook = unpack(adoption_data, 'Facebook');
     const instagram = unpack(adoption_data, 'Instagram');
     const tiktok = unpack(adoption_data, 'TikTok');
     const twitter = unpack(adoption_data, 'Twitter');
     const youtube = unpack(adoption_data, 'YouTube');
-
-    // var traceAny= {
-    //     y: age,
-    //     x: any,
-    //     name: 'Any Social Media',
-    //     marker: {
-    //         color: 'RGB(255, 128, 0)'
-    //     },
-    // }
-
 
      var traceFacebook = {
          y: age,
@@ -72,12 +58,11 @@ Plotly.d3.csv("data/smadoption.csv", adoption_data => {
     var data = [traceFacebook, traceInsta, traceTiktok, traceTwitter, traceYoutube];
     // Data setup
     data.forEach(trace => {
-        trace.hovertemplate = "<b>Platform: </b>" + `${trace.name}<br>` //must use backtick
+        trace.hovertemplate = "<b>Platform: </b>" + `${trace.name}<br>` 
         + "<b>Age Group: </b>" + `%{y}<br>` 
         + "<b>Adoption Rate: </b>" + `%{x} %<br><extra></extra>` ;
         trace.type = "bar";
         trace.orientation = 'h';
-        // trace.visible = false; // set all to invisible by default
     })
 
 

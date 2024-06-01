@@ -1,6 +1,3 @@
-//Below line taken from Week 8 tutorial slides
-//const unpack = (data, key) => data.map(row => row[key]);
-
 Plotly.d3.csv("data/smanxiety.csv", all_data => {
     //Unpack all coloumns
     
