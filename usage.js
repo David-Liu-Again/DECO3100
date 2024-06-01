@@ -1,5 +1,4 @@
-// Should be a vertical bar chart!!!!
-
+const graphTextColor = "#3381B9";
 
 //Below line taken from Week 8 tutorial slides
 const unpack = (data, key) => data.map(row => row[key]);
@@ -8,12 +7,12 @@ Plotly.d3.csv("data/smtime.csv", usage_data => {
     //Unpack all coloumns
     const year = unpack(usage_data, 'Year');
     const global = unpack(usage_data, 'Global');
-    const la = unpack(usage_data, 'Latin America');
-    const mea = unpack(usage_data, 'Middle East & Africa');
+    // const la = unpack(usage_data, 'Latin America');
+    // const mea = unpack(usage_data, 'Middle East & Africa');
     const ap = unpack(usage_data, 'Asia-Pacific');
-    const na = unpack(usage_data, 'North America');
-    const eu = unpack(usage_data, 'Europe');
-    console.log("Eu" + eu);
+    // const na = unpack(usage_data, 'North America');
+    // const eu = unpack(usage_data, 'Europe');
+    // console.log("Eu" + eu);
 
 
 
@@ -28,58 +27,59 @@ Plotly.d3.csv("data/smtime.csv", usage_data => {
     }
 
 
-     var traceLa = {
-         x: year,
-         y: la,
-         name: 'Latin America',
-         mode: 'lines+markers',
-         marker: {
-            color: 'rgb(255, 179, 71)'
-        },
+    //  var traceLa = {
+    //      x: year,
+    //      y: la,
+    //      name: 'Latin America',
+    //      mode: 'lines+markers',
+    //      marker: {
+    //         color: 'rgb(255, 179, 71)'
+    //     },
         
-    }
+    // }
 
-    var traceMea = {
-        x: year,
-        y: mea,
-        name: 'Middle East & Africa',
-        mode: 'lines+markers',
-        marker: {
-            color: 'rgb(177, 156, 217)'
-        },
-    }
+    // var traceMea = {
+    //     x: year,
+    //     y: mea,
+    //     name: 'Middle East & Africa',
+    //     mode: 'lines+markers',
+    //     marker: {
+    //         color: 'rgb(177, 156, 217)'
+    //     },
+    // }
 
     var traceAp = {
             x: year,
             y: ap,
-            name: 'Asia-Pacific',
+            name: 'Australia and Asia-Pacific Region',
             mode: 'lines+markers',
             marker: {
-                color: 'rgb(119, 221, 119)'
+                color: 'rgb(119, 221, 119)',
+                size: 30
             },
     }
 
-    var traceNa = {
-        x: year,
-        y: na,
-        name: 'North America',
-        mode: 'lines+markers',
-        marker: {
-            color: 'rgb(159, 226, 191)',
-        },
-    }
+    // var traceNa = {
+    //     x: year,
+    //     y: na,
+    //     name: 'North America',
+    //     mode: 'lines+markers',
+    //     marker: {
+    //         color: 'rgb(159, 226, 191)',
+    //     },
+    // }
 
-    var traceEu = {
-        x: year,
-        y: eu,
-        name: 'Europe',
-        mode: 'lines+markers',
-        marker: {
-            color: 'rgb(245, 160, 120)',
-        },
-    }
+    // var traceEu = {
+    //     x: year,
+    //     y: eu,
+    //     name: 'Europe',
+    //     mode: 'lines+markers',
+    //     marker: {
+    //         color: 'rgb(245, 160, 120)',
+    //     },
+    // }
 
-    var data = [traceGlobal, traceLa, traceMea, traceAp, traceNa, traceEu];
+    var data = [traceGlobal,  traceAp];
 
     // Data setup
     data.forEach(trace => {
@@ -172,7 +172,9 @@ Plotly.d3.csv("data/smtime.csv", usage_data => {
 
          xaxis:{
             dtick: 1,
-            title: 'Year'
+            title: 'Year',
+            gridcolor: graphTextColor, 
+            gridwidth: 1,
          },
 
          yaxis:{
@@ -182,7 +184,9 @@ Plotly.d3.csv("data/smtime.csv", usage_data => {
             dtick: 1,
             tickwidth: 0,
             range: [0.9, 4],
-            fixedrange: true
+            fixedrange: true,
+            gridcolor: graphTextColor, 
+            gridwidth: 1,
          },
 
          margin:{
@@ -196,7 +200,7 @@ Plotly.d3.csv("data/smtime.csv", usage_data => {
          font: {
             family: 'Arial',
             size: 18,
-            color: '#FFFFFF'
+            color: graphTextColor
         }
 
          //slider
@@ -238,5 +242,5 @@ Plotly.d3.csv("data/smtime.csv", usage_data => {
         //  }]
      }
 
-     Plotly.newPlot("usage",data,layout);
+     Plotly.newPlot("usage",data,layout, {displayModeBar: false});
 })

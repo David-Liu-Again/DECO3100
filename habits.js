@@ -36,17 +36,20 @@ function generateRadialGraph(values, ages, graphid, title){
         chart: {
             height: 390,
             type: 'radialBar',
-            foreColor: '#FFFFFF'
+            foreColor: '#000000',
+            toolbar:{
+                show: false
+            }
         },
         plotOptions: {
             radialBar: {
                 offsetY: 0,
                 startAngle: 0,
-                endAngle: 270,
+                endAngle: 360,
                 hollow: {
                     margin: 5,
                     size: '30%',
-                    background: 'transparent',
+                    background: '#FFFFFF',
                     image: undefined,
                 },
                 dataLabels: {
@@ -57,26 +60,26 @@ function generateRadialGraph(values, ages, graphid, title){
                         show: true,
                     }
                 },
-                barLabels: {
-                    enabled: true,
-                    useSeriesColors: true,
-                    margin: 8,
-                    fontSize: '16px',
-                    formatter: function(seriesName, opts) {
-                        return seriesName + ":  " + roundToOne(opts.w.globals.series[opts.seriesIndex]) +"%"
-                    },
-                },
+                // barLabels: {
+                //     enabled: ,
+                //     useSeriesColors: true,
+                //     margin: 8,
+                //     fontSize: '16px',
+                //     formatter: function(seriesName, opts) {
+                //         return seriesName + ":  " + roundToOne(opts.w.globals.series[opts.seriesIndex]) +"%"
+                //     },
+                // },
             }
         },
         title: {
             text: title,
-            align: 'left',
+            align: 'center',
             margin: 10,
             offsetX: 0,
             offsetY: 0,
             floating: false,
             style: {
-                fontSize:  '14px',
+                fontSize:  '16px',
                 fontWeight:  'bold',
                 fontFamily:  'Roboto',
                 color:  '#FFFFFF'
@@ -91,11 +94,24 @@ function generateRadialGraph(values, ages, graphid, title){
             }
             }
         }],
-                    font: {
+        font: {
                 family: 'Arial',
                 size: 18,
                 color: '#00000'
-            }
+        },
+        legend: {
+            show: (graphid == '#habits_anxiety'),
+            showForSingleSeries: false,
+            position: 'bottom',
+            horizontalAlign: 'center', 
+            floating: false,
+            fontSize: '16px',
+            fontFamily: 'Helvetica, Arial',
+            fontWeight: 400,
+            labels: {
+                colors: '#FFFFFF'
+            },
+        }
     };
 
     return new ApexCharts(document.querySelector(graphid), options);

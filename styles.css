@@ -7,85 +7,194 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto);
 
 
+/* Fonts */
+/* From https://fonts.google.com/selection/embed */
+.dm-serif-display-regular {
+  font-family: "DM Serif Display", serif;
+  font-style: normal;
+}
+
+.dm-serif-display-regular-italic {
+  font-family: "DM Serif Display", serif;
+  font-style: italic;
+}
+
+
 /* FOUNDATIONAL STYLING */
+:root {
+  --main-bg-color: #EEF4F4;
+  --main-text-color: #3381B9;
+  --section-spacing: 10rem;
+  --article-spacing: 5rem;
+}
 
 html {
   font-family: Roboto, sans-serif;
   font-size: 16px;
-  background-color:  rgba(27,32,48);
+  background-color:  var(--main-bg-color);
   margin: 0;
-  color: white;
+  color: #3381B9;
+  font-weight: 400;
+  font-style: normal;
+  font-family: "DM Sans", sans-serif;
+  font-optical-sizing: auto;
+  text-align: center;
 }
 
 body{
   margin: 0;
 }
 
-p, li{
+p, li, br{
   font-size: 1.25rem;
+  margin: 2rem 0;
+  line-height: 2rem;
 }
 
 h1,h2,h3{
   margin: 0;
 }
 
+h1{
+  font-size: 5rem;
+  margin-bottom: 2rem;
+}
+
+h2{
+  font-size: 4.4rem;
+}
+
+
+h3, .large-body{
+  font-size: 2.4rem;
+}
+
+
 h1 strong{
   font-weight: 5000;
 }
 
-/* TEXT AND IMAGE STYLING */
+header, footer{
+  padding: 2rem;
+  height: fit-content;
+}
 
+section{
+  padding: 6rem;
+}
 
-.centred-text{
+.callout{
   width: 100%;
+  height: 90vh;
+  font-style: italic;
+}
+
+.callout,.section-heading,fieldset{
   display: flex;
   align-items: center;
+  justify-content: center;
+  /* padding: 0.5rem 1.4rem; */
+  font-family: "DM Serif Display", serif;
 }
 
-section h1{
+fieldset{
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  font-family: "DM Sans", sans-serif;
+  font-size: 1.5rem;
+}
+
+#resolution fieldset{
+  width: fit-content;
+  gap: 4rem;
+}
+
+.callout > *{
+  max-width: 50rem;
+}
+
+/* TEXT AND IMAGE STYLING */
+
+/* section h1{
   font-size: 3.052rem;
   /* margin-bottom: 2rem; */
-  width: 100%;
-}
 
 .graph{
   margin: 0 2rem;
+  width: 100%;
 }
 
 img{
   max-width: 100%;
 }
 
-
-/* LARGE AREA STYLING */
-header, section, footer{
-  padding: 2rem;
-  height: fit-content;
+article{
+  gap: 3rem;
 }
 
-.callout{
-  background-color: rgb(255, 169, 9);
-  color: rgb(52, 52, 52);
-  font-size: 1.953rem;
-  padding: 0.5rem 1.4rem;
-  border-left: solid 1rem rgb(236, 205, 149);
-  font-style: italic;
+/* ---Section Heading-------------------------------- */
+.section-heading, article{
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+article{
+  align-items: center;
+}
+
+.section-heading{
+  /* background-color: none; */
+  align-items: start;
+  color:white;
+  height: 50rem;
+  position: relative;
+
+  gap: 0rem;
+
+  /* parallax code from https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_parallax*/
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: -2;
+
+}
+
+.section-heading:after, .section-heading:before{
+  position: absolute;
+  content:"";
+  width:100%;
+  height:100%;
+  bottom:0;
+  left:0;
+  z-index: -1;
+}
+
+.section-heading:after{
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.00) 80%,var(--main-bg-color) 100%);
+}
+
+.section-heading::before{
+  background: linear-gradient(to top, rgba(255, 255, 255, 0.00) 80%,var(--main-bg-color) 100%);
 }
 
 /* ---Header-------------------------------- */
 header {
   display: flex;
   flex-direction: column;
-  align-content: flex-end;
+  align-content: start;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  padding-right: 8rem;
 
   position:relative;
   overflow:hidden;
-  justify-content: flex-end;
-  height:50vw;
-  min-height:400px;
-  max-height:550px;
-  min-width:300px;
+  height:50rem;
   color:#ffffff;
+  background: none;
 }
 
 /* header animation code adapted from https://codepen.io/nodws/pen/aWgMMQ */
@@ -97,7 +206,7 @@ header:after{
   bottom:0;
   left:0;
   z-index:-1;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.12) 80%,rgba(27,32,48,1) 100%);
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.12) 60%,var(--main-bg-color) 100%);
 }
 
 header:before{
@@ -107,50 +216,74 @@ header:before{
   position:absolute;
   top:0;
   left:0;
-  -webkit-backface-visibility: hidden;
-  -webkit-transform: translateZ(0); backface-visibility: hidden;
-  scale:(1.0, 1.0);
-  transform: translateZ(0);
-  background:#1B2030 url('./images/header.png') 50% 0 no-repeat;
-  background-size:100%;
+  background:#1B2030 url('./images/header2.jpg') no-repeat center center;
+  background-position: bottom -100px right 0;
+  background-size: cover; 
   background-attachment:fixed;
-  animation: grow 360s  linear 10ms infinite;
   transition:all 0.4s ease-in-out;
-  z-index:-2
+  z-index:-2;
 }
 
-@keyframes grow{
-  0% { transform: scale(1) translateY(0px)}
-  50% { transform: scale(1.2) translateY(-50px)}
+
+header h1, header h2, header h3, .section-heading > *, fieldset > div{
+  background-color:rgba(51, 129, 185, 0.5);
+  width: fit-content;
+  padding: 0 1rem;
+  border-radius: 1rem;
+  color: white;
 }
+
+fieldset > div:hover{
+  background-color:rgba(51, 129, 185, 1);
+}
+
+header h1{
+  font-size: 12rem;
+}
+
+header h3{
+  line-height: 4rem;
+}
+
+section, article{
+  /* add spacing for organisation */
+  margin-top: var(--section-spacing);
+}
+
+/* ---Part 1-------------------------------- */
+#part1-header{
+  background-image: url('./images/part1.jpg');
+}
+
+/* ---Part 2-------------------------------- */
+#part2-header{
+  background-image: url('./images/part2-1.jpg');
+}
+/* ---Part 3-------------------------------- */
+#part3-header{
+  background-image: url('./images/part3-1.jpg');
+}
+/* ---Part 4-------------------------------- */
+#part4-header{
+  background-image: url('./images/selfcare.jpg');
+}
+
 
 section > img{
   margin-bottom: 2rem;
 }
 
-header h1{
-  font-size: 3.8rem;
-  margin-bottom: 2rem;
-}
 
-header h2{
-  font-size: 2.4rem;
-  margin: 0;
-}
 
 #opening{
   padding-top: 4rem;
-  color: white;
-  background-color: rgba(27,32,48,1);
 }
 
-.section-heading{
-  background-color: rgb(51, 160, 255);
-  color:white;
-}
+
 
 footer{
   background-color: rgb(51, 160, 255);
+  color: white;
   width: 100%;
   height: fit-content;
   padding: 0.5rem;
@@ -170,28 +303,42 @@ footer{
   flex: 1;
 }
 
+#habit_graph{
+  background-color: var(--main-text-color);
+  border-radius: 1rem;
+  justify-content: start;
+}
+
 #habit_graph > div:nth-child(2){
   /* make the middle graph slightly bigger for empahsis */
   flex: 1.8;
+}
+
+#resources{
+  height: 35rem;
+}
+
+#resources >article{
+  margin-top: 0;
+  height: 500px;
 }
 
 #resources > article >a { 
   display: flex;
   justify-content: flex-start; /* Optional: Center content horizontally */
   align-items: center; /* Optional: Center content vertically */
-  border: 1px solid black;
+
   flex-direction: column;
-  background-color: rgb(180, 242, 255);
-  color: rgb(0, 0, 0);
-  height: 100%;
+  background-color: var(--main-text-color);
+  color: white;
   text-decoration: none;
   border-radius: 1rem;
   padding: 1.5rem;
-  height: 21rem;
+  height: 100%;
 }
 
 #resources > article >a:hover{
-  background-color: rgb(154, 235, 252);
+  background-color: rgb(119, 143, 188);
 }
 
 #resources > article > a > h4{
@@ -211,12 +358,19 @@ footer{
   height: 40rem;
 }
 
-div #symptoms_description{
+#symptoms_description{
+  width: fit-content;
+  margin: 0 4rem;
   padding: 2rem 3rem;
-  background-color: rgba(143, 255, 255, 0.5);
+  background-color: #3381B9;
   color: rgb(255, 255, 255);
   font-style: italic;
   border-radius: 1rem;
+  text-align: left;
+}
+
+#symptoms_description > a{
+  color: rgb(255, 255, 255);
 }
 
 div #symptoms_description li{

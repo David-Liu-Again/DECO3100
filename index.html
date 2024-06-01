@@ -3,202 +3,203 @@
 <head>
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
 </head>
 
 <!-- Ideal screen resolution: 1920 x 1080 or 1366 x 768 -->
 
 <body>
     <header>
-        <h1>The Anxiety Algorithm</h1>
-        <h2>How social media impacts the wellbeing of Australian youth<h2>
+        <h1 class="dm-serif-display-regular">Soft Reset</h1>
+        <h3>Escaping anxiety in the age of social media<h3>
     </header>
 
     <main>
         <section id="opening">
+
             <div class='callout'>
-                <h3>Why do you use social media?</h3>
+                <h2>Why do you use social media?</h2>
             </div>
             
             <p>
-                Is it to keep in touch with friends and family? To find new videos or TV shows to watch? 
-                To fill spare time whilst waiting for your order at Subway to <strong>finally</strong> arrive? No matter 
+                Is it to keep in touch with friends and family? <br>To find new videos or TV shows to watch? <br>
+                To fill spare time whilst waiting for your order at Subway to <strong>finally</strong> arrive? <br>No matter 
                 the reason, there is one indisputable fact about social media that we can all agree on: 
                 
             </p>
 
-            <p class="centred-text"><strong>it. is. everywhere.</strong></p>
+            <p><strong>It. Is. Everywhere.</strong></p>
             <p>
-                Most of us have welcomed social networks into our lives without a second thought.
-                But what impact these technologies have on our mental wellbeing? Does scrolling your 
-                feed actually make you feel better? Or does it do more harm than good?
+                Most of us have welcomed social networks into our lives without a second thought. <br>
+                But what impact these technologies have on our mental wellbeing? <br> 
+                Does scrolling your feed actually make you feel better or does it do more harm than good?
             </p>
         </section>
 
-        <section class="section-heading">
-            <h3>Part 1: </h3>
+        <section class="section-heading" id="part1-header">
+            <h3>Part 1:</h3>
             <h1>Everything. Everywhere. All at Once.</h1>
+            <!-- <img src="images/part1.jpg"> -->
         </section>
+
         <section id="introduction">
-            <img src="images/part1.jpg">
-            <h2>Average time spent using social networks per day (by region)</h2>
+            
             <!-- Graph 1A -->
-            <div class="graph" id="usage"></div>
-            <p> 
-                Over the last 12 years, the amount of time we spend on social media has increased drastically (Statista, 2024). 
-                In the Asia-Pacific region (which includes Australia), the average usage time peaked in 2022, at 2 hours and 18
-                minutes per day.          
-            </p>
+            <article>
+                <h2>Average time spent on social media each day</h2>
+                <div class="graph" id="usage"></div>
+                <p> 
+                    Over the last 12 years, the amount of time we spend on social media has increased drastically (Statista, 2024). 
+                    In the Asia-Pacific region (which includes Australia), the average usage time peaked in 2022, at 2 hours and 18
+                    minutes per day.          
+                </p>
+            </article>
 
-
-            <h2>Social media adoption rate among internet users by age and platform</h2>
-            <!-- Graph 1B -->
-            <div class="graph" id="adoption"></div>
-            <p>
-                The enormity of social media (SM), especially amongst youth, is reinforced when we look at the graph below. Nearly
-                all of Generation (Gen) Z, internet users aged 16-24, are on SM and they are the biggest adopters out of any 
-                generation. This makes Gen Z highly susceptible to both the positive and negative effects of these apps.       
-            </p>
+            <article>
+                <h2>Social media adoption rate among internet users by age and platform</h2>
+                <!-- Graph 1B -->
+                <div class="graph" id="adoption"></div>
+                <p>
+                    The enormity of social media (SM), especially amongst youth, is reinforced when we look at the graph below. Nearly
+                    all of Generation (Gen) Z, internet users aged 16-24, are on SM and they are the biggest adopters out of any 
+                    generation. <br>This makes Gen Z highly susceptible to both the positive and negative effects of these apps.       
+                </p>
+            </article>
         </section>
         
-        <section class="section-heading">
+        <section class="section-heading"  id="part2-header">
             <h3>Part 2: </h3>
-            <h1>When does it become a problem?</h1>
-        </section>        
+            <h1>(Dis)Connection</h1>
+        </section>
+
         <section id="complication"> 
-            <img src="images/part2.jpg">    
-            <p>
-                The technologies that were meant to bring us closer together, can actually lead us to drift further apart. 
-                Research shows that <strong>how</strong> you use social media has a significant effect on whether it improves
-                 or damages your wellbeing. 
-            </p>
             
             <div class='callout'>
-                <h3>How do I know if I have an unhealthy relationship with SM?</h3>
+                <h2>When does social media become a problem?</h2>
             </div>
 
-            <p>
-                There is no universally agreed upon definition for 'unhealthy' social media use.
-                O’Day & Heimberg (2021) define an unhealthy user as someone who spends an excessive amount of time
-                on these apps whilst socially isolating and giving up other pleasurable activities outside of SM. 
-            </p>
-
-            <p>
-                For this article, we classify an unhealthy social media user as someone who often:
-            </p>
-            <ol>
-                <li>
-                    worries when they can't access their social media accounts
-                </li>
-                <li>
-                    struggles to relax or sleep after spending time on social networking sites
-                </li>
-            </ol>
-
-       
-            <h2>Problematic social media use and anxiety disorder symptoms</h2>
-            <!-- Graph 2A -->
-            <div class="graph" id="symptoms"></div>
-
-            <div>
-                <p id="symptoms_description">
-                    The worst thing about this is that it never ends.
+            <article>
+                <p>
+                    The apps that were meant to bring us closer together, can actually lead us to drift further apart. <br>
+                    There is no universally agreed upon definition for 'unhealthy' social media use, but there are some warning signs. <br>
+                    An unhealthy user might: 
+    
+                    <br>
+                    <br>1. Worry when they can't access their social media accounts
+                    <br>
+                    <br>2. Struggle to relax or sleep after spending time on social networking sites
+    
+                    <br><br>
+    
+                    Problematic social media use is strongly associated with low psychological wellbeing (Worsley, Mansfield, & Corcoran, 2018) and 
+                    a number of different mental disorders, including anxiety (Weinstein, 2023).
+                    A survey on Australian teenagers by Maquarie University found that Australian teenagers experience more anxiety disorder symptoms as they spend more time using social media problematically.
+                    <br>
+                    This is summarised in the graph below.
                 </p>
-            </div>
+            </article>
 
-            <p>
-                The graphs above focus on Australian teenagers that use social media problematically.
-                They demonstrate how the symptoms of various anxiety disorders increase with more frequent SM usage.
-                Problematic SM is strongly associated with low psychological wellbeing (Worsley, Mansfield, & Corcoran, 2018) and 
-                a number of different mental disorders, including anxiety (Weinstein, 2023).
-                
-            </p>
+            <article>
+                <h2>Problematic social media use and anxiety disorder symptoms</h2>
+                <!-- Graph 2A -->
+                <div id="symptoms_description">
+                    <p >
+                    </p>
+                </div>
+                <div class="graph" id="symptoms"></div>
+                <p>
+                    Socially anxious users may log on to these apps to compensate for a lack of in-person support, but often engage with them in a passive way (O’Day & Heimberg, 2021).
+                    This means viewing and browsing content, without directly interacting with other people. This may lead to envy and upward social comparisons, which further
+                    exacerbates their anxiety.
+                </p>
+            </article>
 
-            <p>
-                Socially anxious users may log on to these apps to compensate for a lack of in-person support, but often engage with them in a passive way (O’Day & Heimberg, 2021).
-                This means viewing and browsing content, without directly interacting with other people. This may lead to envy and upward social comparisons, which further
-                exacerbates their anxiety.
-            </p>
-        
-            <h2>Anxiety disorders and unhealthy social media behaviours by age</h2>
-            
-            <!-- referenced https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio -->
-            <fieldset id="habit_buttonset">
-                <legend>Select an Age group</legend>
-                
-                <div>
+            <article>
+                <h2>Anxiety disorders and unhealthy social media behaviours by age</h2>
+                <!-- referenced https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio -->
+                <fieldset id="habit_buttonset">
+                    <legend>Select an Age group</legend>
+                    
+                    <div>
                     <input type="radio" id="habits_all_ages" name="habit_buttons" value= "-1" checked />
                     <label for="habits_all_ages">All Ages</label>
-                </div>
-                
-                <div>
-                    <input type="radio" id="habits_16_24" name="habit_buttons" value="0" />
-                    <label for="habits_16_24">16-24</label>
-                </div>
-              
-                <div>
-                  <input type="radio" id="habits_25_34" name="habit_buttons" value="1" />
-                  <label for="habits_25_34">25-34</label>
-                </div>
-
-                <div>
-                    <input type="radio" id="habits_35_44" name="habit_buttons" value="2" />
-                    <label for="habits_35_44">35-44</label>
-                </div>
-                
-                <div>
-                    <input type="radio" id="habits_45_54" name="habit_buttons" value="3" />
-                    <label for="habits_45_54">45-54</label>
-                </div>
-                
-                <div>
-                    <input type="radio" id="habits_55_64" name="habit_buttons" value="4" />
-                    <label for="habits_55_64">55-64</label>
-                </div>
-            </fieldset>
+                    </div>
+                    
+                    <div>
+                        <input type="radio" id="habits_16_24" name="habit_buttons" value="0" />
+                        <label for="habits_16_24">16-24</label>
+                    </div>
+                    
+                    <div>
+                        <input type="radio" id="habits_25_34" name="habit_buttons" value="1" />
+                        <label for="habits_25_34">25-34</label>
+                    </div>
+                    
+                    <div>
+                        <input type="radio" id="habits_35_44" name="habit_buttons" value="2" />
+                        <label for="habits_35_44">35-44</label>
+                    </div>
+                    
+                    <div>
+                        <input type="radio" id="habits_45_54" name="habit_buttons" value="3" />
+                        <label for="habits_45_54">45-54</label>
+                    </div>
+                    
+                    <div>
+                        <input type="radio" id="habits_55_64" name="habit_buttons" value="4" />
+                        <label for="habits_55_64">55-64</label>
+                    </div>
+                </fieldset>
             
-            
-            <!-- Graphs 2B -->
-            <div class="graph" id="habit_graph">
-                <div id="habits_celeb"></div>
-                <div id="habits_anxiety"></div>
-                <div id="habits_fomo"></div>
-            </div>
+                <p class="centre">Hover over the graphs to learn more.</p>
 
-            <p>
-                In addition to screen time, the reasons <strong>why</strong> you use SM has an effect too.
-
-            </p>
-
-
-            <p>
-                It's not uncommon to be fascinated by a famous person and follow them on SM. However, when our fascination becomes compulsive
-                (i.e. celebrity worship), it can lead to anxiety, poor body image and relationships.
-
-                Similarly, Many of us often feel that other people are having rewarding experiences that we are missing out on,
-                especially when browsing SM. This fear of missing out (FOMO) can drive us to connect with others, but it 
-                can also worsen anxiety and life satisfaction, as well as contribute to problematic social media use
-                (Kacker & Saurav, 2020).
-            </p>
-
-            <p>
-                16-24 year olds (Gen Z) are the most likely to use social media to 'follow celebrities/influencers' and to 'avoid
-                missing out on things' and are the most avid social media users in general. They also the highest incidence of anxiety
-                disorders out of any age group in Australia. Whilst not confirmed, it seems likely that problematic SM behaviours, such as 
-                celebrity worship and checking your phone to avoid missing out, is contributing to the rising rates of anxiety amongst young Australians (from ABS data).
-                <!-- Anxiety disorders have been on the rise over the the past 17 years (based on ABS data) and younger people are always worse off. -->
+                <!-- Graphs 2B -->
+                <div class="graph" id="habit_graph">
+                    <div id="habits_celeb"></div>
+                    <div id="habits_anxiety"></div>
+                    <div id="habits_fomo"></div>
+                </div>
                 
-            </p>
+                <p>
+                    In addition to screen time, the reasons <strong>why</strong> you use SM has an effect too.
+                    <br>
+                    <br>
+
+                    It's not uncommon to be fascinated by a famous person and follow them on SM. However, when our fascination becomes compulsive
+                    (i.e. celebrity worship), it can lead to anxiety, poor body image and relationships.
+                    
+                    Similarly, Many of us often feel that other people are having rewarding experiences that we are missing out on,
+                    especially when browsing SM. This fear of missing out (FOMO) can drive us to connect with others, but it 
+                    can also worsen anxiety and life satisfaction, as well as contribute to problematic social media use
+                    (Kacker & Saurav, 2020).
+
+                    <br>
+                    <br>
+                    
+                    16-24 year olds (Gen Z) are the most likely to use social media to 'follow celebrities/influencers' and to 'avoid
+                    missing out on things' and are the most avid social media users in general. They also the highest incidence of anxiety
+                    disorders out of any age group in Australia. Whilst not confirmed, it seems likely that problematic SM behaviours, such as 
+                    celebrity worship and checking your phone to avoid missing out, is contributing to the rising rates of anxiety amongst young Australians (from ABS data).
+                    <!-- Anxiety disorders have been on the rise over the the past 17 years (based on ABS data) and younger people are always worse off. -->
+                    
+                </p>
+            </article>
         </section>
         
-        <section class="section-heading">
+        <section class="section-heading" id="part3-header">
             <h3>Part 3: </h3>
             <h1>Don't scroll your life away</h1>
         </section>    
+
         <section id="resolution">
-            <img src="images/part3.jpg">
             <div class='callout'>
-                <h3>Should I delete social media?</h3>
+                <h2>Should I delete social media?</h2>
             </div>
             
             <p>
@@ -209,73 +210,52 @@
                satisfaction. An 85 year old ongoing study on adult development at Harvard medical school found that, during our lifetime, the 
                connections we make and maintain will impact our wellbeing more than money, genetics, social status or anything else. 
             </p>
-            
-            <h2>How Community and Relationships lead to better life satisfaction</h2>
-            <!-- Graph 3 -->
-            <fieldset id="lifestyle_buttonset">
-                <legend>Lifestyle Factors</legend>
-              
-                <div>
-                  <input type="radio" id="lifestyle_friends" name="lifestyle_buttons" value= "0" checked />
-                  <label for="lifestyle_friends">Valuing Friends</label>
-                </div>
-              
-                <div>
-                  <input type="radio" id="lifestyle_family" name="lifestyle_buttons" value="1" />
-                  <label for="lifestyle_family">Valuing Family</label>
-                </div>
-              
-                <div>
-                  <input type="radio" id="lifestyle_humanitarian" name="lifestyle_buttons" value="2" />
-                  <label for="lifestyle_humanitarian">Humanitarian Volunteering</label>
-                </div>
-
-                <div>
-                    <input type="radio" id="lifestyle_religious" name="lifestyle_buttons" value="3" />
-                    <label for="lifestyle_religious">Religious Volunteering</label>
-                </div>
-                
-                <div>
-                    <input type="radio" id="lifestyle_sports" name="lifestyle_buttons" value="4" />
-                    <label for="lifestyle_sports">Sports Volunteering</label>
-                </div>
-
-                <div>
-                    <input type="radio" id="lifestyle_labour" name="lifestyle_buttons" value="5" />
-                    <label for="lifestyle_labour">Labour Union Involvement</label>
-                </div>
-            </fieldset>
-            <div class="graph" id="lifestyle"></div>
-
-            <p>
-                Joining a community organisation, spending time with family and making new friends are great ways to improve your health
-                and get more out of life. SM, if used wisely, can help us facilitate these valuable relationships.
-            </p>
+            <article>
+                <h2>How relationships lead to better life satisfaction</h2>
+                <!-- Graph 3 -->
+                <fieldset id="lifestyle_buttonset" class="outline custom-radio">
+                    <legend>Lifestyle Factors</legend>
+                    
+                    <div>
+                        <input type="radio" id="lifestyle_friends" name="lifestyle_buttons" value= "0" checked />
+                        <label for="lifestyle_friends">Valuing Friends</label>
+                    </div>
+                    
+                    <div>
+                        <input type="radio" id="lifestyle_family" name="lifestyle_buttons" value="1" />
+                        <label for="lifestyle_family">Valuing Family</label>
+                    </div>
+                </fieldset>
+                <div class="graph" id="lifestyle"></div>
+                <p>
+                    Joining a community organisation, spending time with family and making new friends are great ways to improve your health
+                    and get more out of life. SM, if used wisely, can help us facilitate these valuable relationships.
+                </p>
+            </article>
         </section>
         
-        <section class="section-heading">
+        <section class="section-heading" id="part4-header">
             <h3>Part 4: </h3>
             <h1>Take care of yourself</h1>
-        </section>    
+        </section>
+
         <section id="advice">
-            <img src="images/selfcare.jpg">
             <p> You may have gotten this advice before, but what does self-care really mean? 
                 Unfortunately, there is no one-size-fits all solution, but a good place
                 to start by noticing your feelings throughout the day. When do you feel invigorated?
                 When do you feel drained? Taking small steps each day to feel more energetic and healthy can lead to 
                 significant improvements later on. Here are some ideas to get started:
+                
+                <br><br>&#x2022; Spend no more than 2 hours on social media each day
+                <br><br>&#x2022; Journal to reflect on what happened in your day to day life
+                <br><br>&#x2022; Maintain a good diet
+                <br><br>&#x2022; Have a regular sleep schedule
+                <br><br>&#x2022; Engage in a creative hobby (e.g. painting)
+                <br><br>&#x2022; Volunteer or join a community group that you're interested in
+                <br><br>&#x2022; Spend time with family and friends
+                <br><br>&#x2022; Spend time in nature
 
-            <ul>
-                <li>Spend no more than 2 hours on social media each day</li>
-                <li>Journal to reflect on what happened in your day to day life</li>
-                <li>Maintain a good diet</li>
-                <li>Have a regular sleep schedule</li>
-                <li>Engage in a creative hobby (e.g. painting)</li>
-                <li>Volunteer or join a community group that you're interested in</li>
-                <li>Spend time with family and friends</li>
-                <li>Spend time in nature</li>
-            </ul>
-
+                
         </section>
         
         <section id="links">

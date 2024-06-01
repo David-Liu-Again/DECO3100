@@ -4,21 +4,21 @@
 Plotly.d3.csv("data/smadoption.csv", adoption_data => {
     //Unpack all coloumns
     const age = unpack(adoption_data, 'Age');
-    const any = unpack(adoption_data, 'Any');
+    // const any = unpack(adoption_data, 'Any');
     const facebook = unpack(adoption_data, 'Facebook');
     const instagram = unpack(adoption_data, 'Instagram');
     const tiktok = unpack(adoption_data, 'TikTok');
     const twitter = unpack(adoption_data, 'Twitter');
     const youtube = unpack(adoption_data, 'YouTube');
 
-    var traceAny= {
-        y: age,
-        x: any,
-        name: 'Any Social Media',
-        marker: {
-            color: 'RGB(255, 128, 0)'
-        },
-    }
+    // var traceAny= {
+    //     y: age,
+    //     x: any,
+    //     name: 'Any Social Media',
+    //     marker: {
+    //         color: 'RGB(255, 128, 0)'
+    //     },
+    // }
 
 
      var traceFacebook = {
@@ -69,7 +69,7 @@ Plotly.d3.csv("data/smadoption.csv", adoption_data => {
         },
     }
 
-    var data = [traceAny, traceFacebook, traceInsta, traceTiktok, traceTwitter, traceYoutube];
+    var data = [traceFacebook, traceInsta, traceTiktok, traceTwitter, traceYoutube];
     // Data setup
     data.forEach(trace => {
         trace.hovertemplate = "<b>Platform: </b>" + `${trace.name}<br>` //must use backtick
@@ -77,12 +77,8 @@ Plotly.d3.csv("data/smadoption.csv", adoption_data => {
         + "<b>Adoption Rate: </b>" + `%{x} %<br><extra></extra>` ;
         trace.type = "bar";
         trace.orientation = 'h';
-        trace.visible = false; // set all to invisible by default
+        // trace.visible = false; // set all to invisible by default
     })
-
-    traceAny.visible = true;
-
-    console.log(data);
 
 
     var updatemenus=[
@@ -96,39 +92,39 @@ Plotly.d3.csv("data/smadoption.csv", adoption_data => {
                     method: 'update',
                     active:false
                 },
+                // {
+                //     args: [{'visible': [true, false, false, false, false, false]},
+                //     {'title': 'Any Social Media'}],
+                //     label: 'Any Social Media',
+                //     method: 'update',
+                //     active: true
+                // },
                 {
-                    args: [{'visible': [true, false, false, false, false, false]},
-                    {'title': 'Any Social Media'}],
-                    label: 'Any Social Media',
-                    method: 'update',
-                    active: true
-                },
-                {
-                    args: [{'visible': [false, true, false, false, false, false]},
+                    args: [{'visible': [true, false, false, false, false]},
                     {'title': 'Facebook'}],
                     label: 'Facebook',
                     method: 'update'
                 },
                 {
-                    args: [{'visible': [false, false, true, false, false, false]},
+                    args: [{'visible': [false, true, false, false, false]},
                     {'title': 'Instagram'}],
                     label: 'Instagram',
                     method: 'update'
                 },
                 {
-                    args: [{'visible': [false, false, false, true, false, false]},
+                    args: [{'visible': [false, false, true, false, false]},
                     {'title': 'TikTok'}],
                     label: 'TikTok',
                     method: 'update'
                 },
                 {
-                    args: [{'visible': [false, false, false, false, true, false]},
+                    args: [{'visible': [false, false, false, true, false]},
                     {'title': 'Twitter'}],
                     label: 'Twitter',
                     method: 'update'
                 },
                 {
-                    args: [{'visible': [false, false, false, false, false, true]},
+                    args: [{'visible': [false, false, false, false, true]},
                     {'title': 'Youtube'}],
                     label: 'Youtube',
                     method: 'update'
@@ -142,13 +138,13 @@ Plotly.d3.csv("data/smadoption.csv", adoption_data => {
             xanchor: 'left',
             y: 1,
             yanchor: 'top',
-            active: 1,
-            activecolor: 'rgb(255, 165, 0)',
+            active: 0,
+            activecolor: 'rgb(0,0,0)',
             bgcolor: 'rgba(255, 255, 255, 0.5)', 
             font: {
                 family: 'Arial',
                 size: 18,
-                color: '#000000'
+                color: graphTextColor
             }
         }
     ]
@@ -183,17 +179,22 @@ Plotly.d3.csv("data/smadoption.csv", adoption_data => {
 
         xaxis:{
             title: 'Total Adoption Rate (%)',
-            fixedrange: true
+            fixedrange: true,
+            zerolinewidth:1
         },
 
         yaxis:{
-            title: 'Age Bracket',
+            title:{
+                text: 'Age Bracket',
+                standoff: 5  
+            }, 
             tickmode: "linear",
             tick0: 0,
             dtick: 1,
             tickwidth: 0,
             range: [-0.5, 6],
-            fixedrange: true
+            fixedrange: true,
+            zerolinewidth: 0
         },
 
         margin:{
@@ -212,9 +213,9 @@ Plotly.d3.csv("data/smadoption.csv", adoption_data => {
         font: {
             family: 'Arial',
             size: 18,
-            color: '#FFFFFF'
+            color: graphTextColor
         },
     }
 
-     Plotly.newPlot("adoption",data,layout);
+     Plotly.newPlot("adoption",data,layout, {displayModeBar: false});
 })

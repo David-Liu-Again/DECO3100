@@ -9,20 +9,12 @@ const unpackFirst = (data) => data.map(row => Object.values(row)[0]);
 // initalise empty array to hold the graph data
 let fileNames = [
     "friends.csv",
-    "family.csv",
-    "humanitarian.csv",
-    "religious.csv",
-    "sport.csv",
-    "union.csv"
+    "family.csv"
 ]
-let database = [null,null,null,null,null,null]
+let database = [null,null]
 let graphTitles = [
     "The Importance of Friends",
     "The Importance of Family",
-    "The Importance of Humanitarian Volunteering",
-    "The Importance of Religious Volunteering",
-    "The Importance of Sport Volunteering",
-    "The Importance of Union Membership"
 ]
 
 // Initialise a dataless graph
@@ -75,7 +67,10 @@ unpackCSV(currentGraphIndex, (newGraphData) => {
         chart: {
             height: 350,
             type: 'line',
-            foreColor: '#FFFFFF'
+            foreColor: graphTextColor,
+            toolbar:{
+                show: false
+            }
         },
         stroke: {
             width: [0, 4]
@@ -84,11 +79,16 @@ unpackCSV(currentGraphIndex, (newGraphData) => {
         title: {
             //Update this
             text: graphTitles[currentGraphIndex],
+            align: 'center',
+            margin: 10,
+            offsetX: 0,
+            offsetY: 0,
+            floating: false,
             style: {
-                fontSize:  '14px',
+                fontSize:  '16px',
                 fontWeight:  'bold',
                 fontFamily:  'Roboto',
-                color:  '#FFFFFF'
+                color:  graphTextColor
             },
         },
         dataLabels: {

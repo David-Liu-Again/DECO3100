@@ -66,7 +66,6 @@ Plotly.d3.csv("data/smanxiety.csv", all_data => {
         marker: {
             color: 'RGB(123, 160, 255)'
         },
-        visible: true,
         line:{
             width: 3
         }
@@ -80,7 +79,6 @@ Plotly.d3.csv("data/smanxiety.csv", all_data => {
         marker: {
             color: 'RGB(255, 85, 85)'
         },
-        visible: false,
         line:{
             width: 3
         }
@@ -94,7 +92,6 @@ Plotly.d3.csv("data/smanxiety.csv", all_data => {
         marker: {
             color: 'RGB(200, 150, 255)'
         },
-        visible: false,
         line:{
             width: 3
         }
@@ -108,7 +105,6 @@ Plotly.d3.csv("data/smanxiety.csv", all_data => {
         marker: {
             color: 'RGB(255, 215, 0)'
         },
-        visible: false,
         line:{
             width: 3
         }
@@ -285,7 +281,7 @@ Plotly.d3.csv("data/smanxiety.csv", all_data => {
             xanchor: 'left',
             y: 1.15,
             yanchor: 'top',
-            active: 1,
+            active: 0,
             font: {
                 family: 'Arial',
                 size: 18,
@@ -325,7 +321,7 @@ Plotly.d3.csv("data/smanxiety.csv", all_data => {
                 color: '#00000'
             }
         },
-        shapes: createShapes("Total Anxiety"),
+        // shapes: createShapes("Total Anxiety"),
         xaxis:{
             title: 'Frequency of Social Media Use ',
             fixedrange: true,
@@ -333,10 +329,11 @@ Plotly.d3.csv("data/smanxiety.csv", all_data => {
             gridwidth: 1,
             tickmode: "array",
             tickvals: [1,2,3,4,5,6],
-            ticktext: ['Once a week or less', 'Several times a week', '1-4 times per day','5-10 times per day', 'Over 10 times per day', 'Constantly']
-            //Frequency SM Use (1 = Once a week or less, 2 = Several 
-            //times a week, 3 = About 1-4 times per day, 4 = About 
-            //5-10 times per day,  5 = More than 10 times a day,  6 = Constantly)
+            ticktext: ['Once a week or less', 'Several times a week', '1-4 times per day','5-10 times per day', 'Over 10 times per day', 'Constantly'],
+            fixedrange:true,
+            tickfont:{
+                size: 12
+            }
         },
 
         yaxis:{
@@ -351,16 +348,12 @@ Plotly.d3.csv("data/smanxiety.csv", all_data => {
             fixedrange: true
         },
 
-        xaxis:{
-            fixedrange:true
-        },
-
         margin:{
             t:10
         },
 
         title: {
-            text:'Overall Anxiety',
+            text:'All Anxiety Types',
             font: {
                 family: 'Arial',
                 size: 24
@@ -371,23 +364,23 @@ Plotly.d3.csv("data/smanxiety.csv", all_data => {
         font: {
             family: 'Arial',
             size: 18,
-            color: '#FFFFFF'
+            color: graphTextColor
         },
         autosize: true,
         margin: {
           t: 100,
         },
-        annotations: annotationArray,
-        showlegend: false
+        annotations: [],
+        // showlegend: false
 
     }
 
-    Plotly.newPlot("symptoms",data,layout).then(function(){
+    Plotly.newPlot("symptoms",data,layout,{displayModeBar: false}).then(function(){
         var myGraph = document.getElementById('symptoms');
         var buttons = myGraph.querySelectorAll(".updatemenu-button");
 
-        var graphDescription= document.getElementById('symptoms_description');
-        graphDescription.innerHTML = anxietyDescriptions[1];
+        var graphDescription= document.querySelector('#symptoms_description p');
+        graphDescription.innerHTML = anxietyDescriptions[0];
 
         for (let i = 0; i < buttons.length; i++) {
             buttons[i].addEventListener("click", function(){
