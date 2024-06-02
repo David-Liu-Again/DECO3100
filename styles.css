@@ -100,7 +100,7 @@ header h1, header h2, header h3, .section-heading > *, fieldset > div{
 /* <Main> Styles--------------------------------- */
 
 /* Block Elements -------------*/
-section{
+section, article p{
   padding: 6rem;
 }
 
@@ -139,7 +139,7 @@ img{
 
 article{
   gap: 3rem;
-    align-items: center;
+  align-items: center;
 }
 
 .section-heading, article{
@@ -155,7 +155,7 @@ article{
 p, li, br{
   font-size: 1.25rem;
   margin: 2rem 0;
-  line-height: 2rem;
+  line-height: 2.7rem;
 }
 
 h1,h2,h3{

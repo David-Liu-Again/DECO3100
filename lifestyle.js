@@ -1,16 +1,19 @@
-// establishing global variables containing csv data
-var currentGraphIndex = 0;
+// establishing global variables
+var currentGraphIndex = 0; // integer indicating the current graph being displayed (friends or family)
 var lifestyleChart;
 
-// Function to unpack the first column of the datasety
+// Function to unpack the first column of the dataset only
 const unpackFirst = (data) => data.map(row => Object.values(row)[0]);
 
-// initalise empty array to hold the graph data
+// Array to hold the file names of the data 
 let fileNames = [
     "friends.csv",
     "family.csv"
-]
-let database = [null,null]
+];
+
+// Initalise array to hold the graph data 
+let database = [null,null];
+
 let graphTitles = [
     "The Importance of Friends",
     "The Importance of Family",
@@ -23,19 +26,28 @@ let graphTitles = [
 // Update the graph to display the data
 
 function unpackCSV(index, callback){
-    // unpack the data if it hasn't been done already
+    // unpacks data for a specified graph, unless it has been done already
+    // We don't uppack every graph upfront, only when it is displayed
+    // This saves time when loading the page initially
+
+    // Parameters
+    // Index = integer denoting which graph to fetch data for (0= friends, 1 = family)
+    // Callback = callback function
+
     Plotly.d3.csv("data/lifestyle/" + fileNames[index], life_data => {
+        //independent variable
         let independentVar = unpackFirst(life_data);
-        // Unpack all columns
-        let health = unpack(life_data, 'health').map(Number);
+        // dependent variable
         let lifeSatisfaction = unpack(life_data, 'life satisfaction').map(Number);
         
-        let newGraphData = [independentVar, health, lifeSatisfaction];
+        let newGraphData = [independentVar, lifeSatisfaction];
         
         if (database[index] != null) {
+            // The current graph has been loaded already, we throw an error
             throw new Error('Attempting to overwrite database');
         }
 
+        // Add new graph to the database
         database[index] = newGraphData;
 
         // Call the callback function after the database has been updated
@@ -48,29 +60,28 @@ function unpackCSV(index, callback){
 
 // Initialise default data to be displayed to the user
 unpackCSV(currentGraphIndex, (newGraphData) => {
-    console.log('New graph data:', newGraphData);
-    console.log('Database:', database);
-
     var options = {
         series: [{
                 name: 'Life Satisfaction',
                 type: 'column',
-                data: newGraphData[2],
+                data: newGraphData[1],
             }],
+
         chart: {
-            height: 350,
-            // type: 'line',
+            height: 600,
             foreColor: graphTextColor,
             toolbar:{
                 show: false
             }
         },
+
         stroke: {
             width: [0, 4]
         },
-        colors: ['#1ab7ea',  '#FFA07A',],
+
+        colors: ['#1ab7ea'],
+
         title: {
-            //Update this
             text: graphTitles[currentGraphIndex],
             align: 'center',
             margin: 10,
@@ -78,46 +89,68 @@ unpackCSV(currentGraphIndex, (newGraphData) => {
             offsetY: 0,
             floating: false,
             style: {
-                fontSize:  '16px',
+                fontSize:  '36px',
                 fontWeight:  'bold',
                 fontFamily:  'Roboto',
                 color:  graphTextColor
             },
         },
+
         dataLabels: {
             enabled: false,
-            //enabledOnSeries: [1]
         },
+
         labels: newGraphData[0],
-        xaxis: {
-            //type: 'datetime'
+
+        xaxis:{
+            title: {
+                text: 'Individual Opinion on ' + (currentGraphIndex==0 ? "Friends" : "Family"),
+                style: {
+                    fontSize: '24px',
+                    fontFamily: 'Helvetica, Arial, sans-serif',
+                    fontWeight: 600,
+                    cssClass: 'apexcharts-yaxis-title',
+                }
+            }
         },
+
         yaxis: {
             title: {
-                text: 'Health and Life Satisfaction (%)',
+                text: 'Life Satisfaction (%)',
+                style: {
+                    fontSize: '24px',
+                    fontFamily: 'Helvetica, Arial, sans-serif',
+                    fontWeight: 600,
+                    cssClass: 'apexcharts-yaxis-title',
+                }
             },
             stepSize: 20,
             min:0,
-            max: 80,
-            decimalsInFloat:0
+            max: 100,
+            decimalsInFloat:0,
+            style: {
+                fontSize: '40px',
+                fontWeight: 400,
+            },
         },
+
         tooltip: {
             shared:false,
             theme:  'dark',
             y: {
                 formatter: function(value) {
+                    // Round the percentage shown in the tool tip to one decimal place
                     return roundToOne(value) + "%"
                 },
                 
-            },
+            }
+        },
 
-            style: {
-                fontSize:  '14px',
-                fontWeight:  'bold',
-                fontFamily:  'Roboto',
-                color:  '#000000'
-            },
-        }
+        font: {
+            family: 'Arial',
+            size: 30,
+            color: '#00000'
+        },
     };
 
     lifestyleChart = new ApexCharts(document.querySelector("#lifestyle"), options);
@@ -126,17 +159,15 @@ unpackCSV(currentGraphIndex, (newGraphData) => {
 
 
 function updateLifestyleGraph(newGraphNumber){
-        // This displays the lifestyle graphs and is called when a lifestyle button is clicked
+        // This displays the lifestyle graphs and is called when one of the radio buttons is clicked
         // GraphNumber indicates which graph to be dislpayed
         //Possible Values
         // 0 = Importance of Family
         // 1 = Importance of Friends
-        // 2 = Importance of Humanitarian Volunteering
-        // 3 = Importance of Religious Volunteering
-        // 4 = Importance of Sport Volunteering
-        // 5 = The Importance of Union Membership
+
         let newGraphData;
         
+        //Update the global variable
         currentGraphIndex = newGraphNumber;
 
         //Display the new data
@@ -150,32 +181,34 @@ function updateLifestyleGraph(newGraphNumber){
             newGraphData = database[currentGraphIndex];
             displayNewData(newGraphData);
         }
-
-        //update back and forward buttons
 }
 
 function displayNewData(newGraphData){
-    console.log("New graph data: ", newGraphData);
     lifestyleChart.updateOptions({
         series: [{
-            data: newGraphData[2],
+            data: newGraphData[1],
         }],
         labels: newGraphData[0],
         title: {
             text: graphTitles[currentGraphIndex]
         },
+        xaxis:{
+            title: {
+                text: 'Individual Opinion on ' + (currentGraphIndex==0 ? "Friends" : "Family"),
+            }
+        }
     }, 
     false, true);
 }
 
-// // Retrieving an array contianing the buttons used to alter the graph data
+// Retrieving an array containing the radio buttons used to alter the graph data
 let lifestyleFieldset = document.querySelector("#lifestyle_buttonset");
 let lifestyleRadioArray = lifestyleFieldset.querySelectorAll("input"); // all buttons
 console.log(lifestyleRadioArray);
 
 lifestyleRadioArray.forEach(button =>{
+    // Attaching event listeners to each radio button, so that they can alter the graph data
     button.addEventListener("click", function(event) {
-        console.log(button.name, button.value);
         let ageBracket = parseInt(button.getAttribute("value"));
         updateLifestyleGraph(ageBracket);
     });

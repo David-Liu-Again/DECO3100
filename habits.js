@@ -1,38 +1,49 @@
-// establishing global variables containing csv data
+// Establishing global variables
 var age, anxiety, celebrity, fomo, anxietyChart, celebrityChart,fomoChart;
-let radialColours = ['#1ab7ea', '#0084ff', '#39539E', '#0077B5'];
+// Colours for each series in the chart
+const radialColours = [
+    "#EE82EE", 
+    "#FF69B4", 
+    "#8000FF", 
+    "#FFC300", 
+    "#DDA0DD"  
+]
 
 Plotly.d3.csv("data/smhabits.csv", habit_data => {
     //Unpack all coloumns
     age = unpack(habit_data, 'Age Group');
-    anxiety = unpack(habit_data, 'Anxiety').map(Number);
+    anxiety = unpack(habit_data, 'Anxiety').map(Number);// convert to float from string
     celebrity = unpack(habit_data, 'Celebrity').map(Number);
     fomo = unpack(habit_data, 'FOMO').map(Number);
     
     //Initialise Graphs
+
     //Chart 1: Celebrity Followers
-    celebrityChart = generateRadialGraph(celebrity, age,"#habits_celeb" , "Use SM to follow celebrities or influencers");
+    celebrityChart = generateRadialGraph(celebrity, "#habits_celeb" , "Use SM to follow celebrities or influencers");
     celebrityChart.render();
+
     //Chart 2: Prevalance of anxiety disorders
-    anxietyChart = generateRadialGraph(anxiety, age, "#habits_anxiety", "Prevalance of anxiety disorders");
+    anxietyChart = generateRadialGraph(anxiety,  "#habits_anxiety", "Prevalance of anxiety disorders");
     anxietyChart.render();
+
     // //Chart 3: Fear of Missing Out
-    fomoChart = generateRadialGraph(fomo, age, "#habits_fomo", "Use SM to avoid missing out on things");
+    fomoChart = generateRadialGraph(fomo, "#habits_fomo", "Use SM to avoid missing out on things");
     fomoChart.render()
 });
 
-function generateRadialGraph(values, ages, graphid, title){
-    // Values = the percentages displayed on the radial graph
-    
+function generateRadialGraph(values, graphid, title){
+    // Initalises a new radial graph
+
+    // Parameters
+    // Values = the percentages to be displayed on the radial graph
     // graph id  = The id tag on the div to be turned into a graph
     // Title = The title of the graph to be displayed
 
     /* Below is adapted from https://apexcharts.com/javascript-chart-demos/radialbar-charts/custom-angle-circle/ */
-    
        
     var options = {
         series: values,
-        labels: ages,
+        labels: age,
         chart: {
             height: 390,
             type: 'radialBar',
@@ -41,16 +52,17 @@ function generateRadialGraph(values, ages, graphid, title){
                 show: false
             }
         },
+
         plotOptions: {
             radialBar: {
                 offsetY: 0,
                 startAngle: 0,
                 endAngle: 360,
                 hollow: {
+                    // Fill in the hollow centre of the ring
                     margin: 5,
                     size: '30%',
                     background: '#FFFFFF',
-                    image: undefined,
                 },
                 dataLabels: {
                     name: {
@@ -60,17 +72,9 @@ function generateRadialGraph(values, ages, graphid, title){
                         show: true,
                     }
                 },
-                // barLabels: {
-                //     enabled: ,
-                //     useSeriesColors: true,
-                //     margin: 8,
-                //     fontSize: '16px',
-                //     formatter: function(seriesName, opts) {
-                //         return seriesName + ":  " + roundToOne(opts.w.globals.series[opts.seriesIndex]) +"%"
-                //     },
-                // },
             }
         },
+
         title: {
             text: title,
             align: 'center',
@@ -85,21 +89,17 @@ function generateRadialGraph(values, ages, graphid, title){
                 color:  '#FFFFFF'
             },
         },
+
         colors: radialColours,
-        responsive: [{
-            breakpoint: 480,
-            options: {
-            legend: {
-                show: false
-            }
-            }
-        }],
+
         font: {
                 family: 'Arial',
                 size: 18,
                 color: '#00000'
         },
+
         legend: {
+            // We only show the legend for the central graph of the three, to avoid repetition
             show: (graphid == '#habits_anxiety'),
             showForSingleSeries: false,
             position: 'bottom',
@@ -115,7 +115,6 @@ function generateRadialGraph(values, ages, graphid, title){
     };
 
     return new ApexCharts(document.querySelector(graphid), options);
-
 }
 
 function roundToOne(num) {
@@ -124,14 +123,14 @@ function roundToOne(num) {
 }
 
 function updateGraphs(ageBracket = -1){
-        // This displays the three radial graphs and is called when a age group button is clicked or when the page is loaded
-        // AgeBracket is an integer that indicates which age bracket is to be displayed
-        // -1 = All age groups
-        // 0 = 16-24
-        // 1 = 25-34
-        // 2 = 35-44
-        // 3 = 45-54
-        // 4 = 55-64
+        // Updates the radial graphs when a radial button is clicked
+        // Parameter ageBracket represents the currently selected radial button:
+        // ageBracket = -1 is All Ages (the default value)
+        // ageBracket = 0 is 16-24
+        // ageBracket = 1 is 25-34
+        // ageBracket = 2 is 35-44
+        // ageBracket = 3 is 45-54
+        // ageBracket = 4 is 55-64
 
         // temporary variables to hold the data that will be displayed
         let celebrity_values = [];
@@ -140,9 +139,7 @@ function updateGraphs(ageBracket = -1){
         let age_values = [];
         let colour_values = [];
         
-        
         if (ageBracket == -1){
-            // All Ages (the default value)
             // all data is displayed
             celebrity_values = celebrity;
             anxiety_values = anxiety;
@@ -150,18 +147,13 @@ function updateGraphs(ageBracket = -1){
             age_values = age;
             colour_values = radialColours
         } else{
-            // age Bracket is 0,1,2,3 or4
-            // only 1 age bracket is displayed
+            // age Bracket must be 0, 1, 2, 3 or 4
             celebrity_values.push(celebrity[ageBracket]);
             anxiety_values.push(anxiety[ageBracket]);
             fomo_values.push(fomo[ageBracket]);
             age_values.push(age[ageBracket]);
             colour_values.push(radialColours[ageBracket]);
         }
-        console.log(celebrity_values);
-        console.log(anxiety_values);
-        console.log(fomo_values);
-        console.log(age_values);
 
         //Chart 1: Celebrity Followers
         celebrityChart.updateOptions({
@@ -174,25 +166,30 @@ function updateGraphs(ageBracket = -1){
         //Chart 2: Prevalance of anxiety disorders
         anxietyChart.updateOptions({
                 series: anxiety_values,
-                labels: age_values
+                labels: age_values,
+                colors: colour_values,
+                legend: {
+                    // We only show the legend for the central graph whilst it has multiple series displayed
+                    show: (ageBracket == -1)
+                }
             }, 
             false, true);
 
         // //Chart 3: Fear of Missing Out
         fomoChart.updateOptions({
                 series: fomo_values,
-                labels: age_values
+                labels: age_values,
+                colors: colour_values
             }, 
             false, true);
-
 }
 
-// Retrieving an array contianing the buttons used to alter the graph data
+// Retrieving an array containing the radio buttons 
 let habitFieldset = document.querySelector("#habit_buttonset");
 let habitRadioArray = habitFieldset.querySelectorAll("input"); // all buttons
-console.log(habitRadioArray);
 
 habitRadioArray.forEach(button =>{
+    // Attaching event listeners to each radio button, so that they can alter the graph data
     button.addEventListener("click", function(event) {
         let ageBracket = parseInt(button.getAttribute("value"));
         updateGraphs(ageBracket);
