@@ -14,7 +14,7 @@ Plotly.d3.csv("data/smanxiety.csv", all_data => {
     // Array containing descriptive text about each anxiety condition, to be displayed above the graph itself    
     const anxietyDescriptions = [
         `The results in these graphs are based on responses to <a href="https://www.scaswebsite.com/portfolio/scas-child-overview/" target="_blank">Spence Children's Anxiety Scale</a>.
-        Young people self-reported the intensity of common anxiety symptoms on a 4-point scale of frequency. 
+        <br> Young people self-reported the intensity of common anxiety symptoms. 
         `,
         `The overall anxiety score rates the intensity of symptoms across six different types of anxiety. These include:<ul>
         <li><a href="https://www.betterhealth.vic.gov.au/health/healthyliving/Generalised-anxiety-disorder" target="_blank">generalized anxiety disorder (GAD)</a></li>
@@ -31,7 +31,7 @@ Plotly.d3.csv("data/smanxiety.csv", all_data => {
     </ul>`,
     `<a href="https://www.ncbi.nlm.nih.gov/books/NBK560793/#:~:text=Separation%20anxiety%20disorder%20(SAD)%20is,separation%20from%20an%20attachment%20figure." target="_blank">Seperation anxiety disorder (SAD)</a> is an anxiety disorder wherein
     somebody becomes excessively worried or concerned when a loved one leaves them alone. It can affect both adults and children. Children might be anxious about their parents or guardian leaving, whereas adults
-    might worry about their children, romantic partners or spouses.The percentage scores above indicate the intensity of common SAD symptoms, such as:
+    might worry about their children, romantic partners or spouses. The percentage scores above indicate the intensity of common SAD symptoms, such as:
     <ul>
         <li>Being afraid of being home alone</li>
         <li>Worrying about being away from my parents</li>

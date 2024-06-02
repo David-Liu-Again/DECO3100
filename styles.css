@@ -158,6 +158,10 @@ p, li, br{
   line-height: 2.7rem;
 }
 
+fieldset + p{
+  padding: 0
+}
+
 h1,h2,h3{
   margin: 0;
 }
@@ -290,8 +294,8 @@ footer{
   text-align: left;
 }
 
-#symptoms_description > a{
-  color: rgb(255, 255, 255);
+#symptoms_description > p{
+  padding: 0;
 }
 
 #symptoms_description li{
@@ -374,6 +378,7 @@ footer{
 
 #resources > article > a > p{
   font-size: 1rem;
+  padding:0;
 }
 
 #resources > article > a > img{

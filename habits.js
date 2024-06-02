@@ -19,15 +19,15 @@ Plotly.d3.csv("data/smhabits.csv", habit_data => {
     //Initialise Graphs
 
     //Chart 1: Celebrity Followers
-    celebrityChart = generateRadialGraph(celebrity, "#habits_celeb" , "Use SM to follow celebrities or influencers");
+    celebrityChart = generateRadialGraph(celebrity, "#habits_celeb" , "'I follow celebrities on social media'");
     celebrityChart.render();
 
     //Chart 2: Prevalance of anxiety disorders
-    anxietyChart = generateRadialGraph(anxiety,  "#habits_anxiety", "Prevalance of anxiety disorders");
+    anxietyChart = generateRadialGraph(anxiety,  "#habits_anxiety", "'I experience an anxiety disorder'");
     anxietyChart.render();
 
     // //Chart 3: Fear of Missing Out
-    fomoChart = generateRadialGraph(fomo, "#habits_fomo", "Use SM to avoid missing out on things");
+    fomoChart = generateRadialGraph(fomo, "#habits_fomo", "'I use social media to avoid missing out'");
     fomoChart.render()
 });
 
