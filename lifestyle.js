@@ -53,17 +53,13 @@ unpackCSV(currentGraphIndex, (newGraphData) => {
 
     var options = {
         series: [{
-                name: 'Health',
-                type: 'column',
-                data: newGraphData[1],
-            }, {
                 name: 'Life Satisfaction',
                 type: 'column',
                 data: newGraphData[2],
             }],
         chart: {
             height: 350,
-            type: 'line',
+            // type: 'line',
             foreColor: graphTextColor,
             toolbar:{
                 show: false
@@ -129,7 +125,7 @@ unpackCSV(currentGraphIndex, (newGraphData) => {
 });
 
 
-function updateComboGraph(newGraphNumber){
+function updateLifestyleGraph(newGraphNumber){
         // This displays the lifestyle graphs and is called when a lifestyle button is clicked
         // GraphNumber indicates which graph to be dislpayed
         //Possible Values
@@ -162,8 +158,6 @@ function displayNewData(newGraphData){
     console.log("New graph data: ", newGraphData);
     lifestyleChart.updateOptions({
         series: [{
-            data: newGraphData[1],
-        }, {
             data: newGraphData[2],
         }],
         labels: newGraphData[0],
@@ -183,6 +177,6 @@ lifestyleRadioArray.forEach(button =>{
     button.addEventListener("click", function(event) {
         console.log(button.name, button.value);
         let ageBracket = parseInt(button.getAttribute("value"));
-        updateComboGraph(ageBracket);
+        updateLifestyleGraph(ageBracket);
     });
 });

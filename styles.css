@@ -1,21 +1,7 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto);
+/* FOUNDATIONAL STYLING ------------------------------------------------*/
 
-
-/* Fonts */
-/* From https://fonts.google.com/selection/embed */
-.dm-serif-display-regular {
-  font-family: "DM Serif Display", serif;
-  font-style: normal;
-}
-
-.dm-serif-display-regular-italic {
-  font-family: "DM Serif Display", serif;
-  font-style: italic;
-}
-
-
-/* FOUNDATIONAL STYLING */
 :root {
+  /* variables that are referenced throughout this stylesheet are found here, so that quick visual changes can be made easily */
   --main-bg-color: #EEF4F4;
   --main-text-color: #3381B9;
   --section-spacing: 10rem;
@@ -39,143 +25,16 @@ body{
   margin: 0;
 }
 
-p, li, br{
-  font-size: 1.25rem;
-  margin: 2rem 0;
-  line-height: 2rem;
-}
 
-h1,h2,h3{
-  margin: 0;
-}
+/* ELEMENT STYLING---------------------------------------------------- */
 
-h1{
-  font-size: 5rem;
-  margin-bottom: 2rem;
-}
-
-h2{
-  font-size: 4.4rem;
-}
-
-
-h3, .large-body{
-  font-size: 2.4rem;
-}
-
-
-h1 strong{
-  font-weight: 5000;
-}
+/* <Header> Styles---------------------- */
 
 header, footer{
   padding: 2rem;
   height: fit-content;
 }
 
-section{
-  padding: 6rem;
-}
-
-.callout{
-  width: 100%;
-  height: 90vh;
-  font-style: italic;
-}
-
-.callout,.section-heading,fieldset{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  /* padding: 0.5rem 1.4rem; */
-  font-family: "DM Serif Display", serif;
-}
-
-fieldset{
-  flex-direction: row;
-  width: 100%;
-  justify-content: space-between;
-  font-family: "DM Sans", sans-serif;
-  font-size: 1.5rem;
-}
-
-#resolution fieldset{
-  width: fit-content;
-  gap: 4rem;
-}
-
-.callout > *{
-  max-width: 50rem;
-}
-
-/* TEXT AND IMAGE STYLING */
-
-/* section h1{
-  font-size: 3.052rem;
-  /* margin-bottom: 2rem; */
-
-.graph{
-  margin: 0 2rem;
-  width: 100%;
-}
-
-img{
-  max-width: 100%;
-}
-
-article{
-  gap: 3rem;
-}
-
-/* ---Section Heading-------------------------------- */
-.section-heading, article{
-  display:flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-}
-
-article{
-  align-items: center;
-}
-
-.section-heading{
-  /* background-color: none; */
-  align-items: start;
-  color:white;
-  height: 50rem;
-  position: relative;
-
-  gap: 0rem;
-
-  /* parallax code from https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_parallax*/
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  z-index: -2;
-
-}
-
-.section-heading:after, .section-heading:before{
-  position: absolute;
-  content:"";
-  width:100%;
-  height:100%;
-  bottom:0;
-  left:0;
-  z-index: -1;
-}
-
-.section-heading:after{
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.00) 80%,var(--main-bg-color) 100%);
-}
-
-.section-heading::before{
-  background: linear-gradient(to top, rgba(255, 255, 255, 0.00) 80%,var(--main-bg-color) 100%);
-}
-
-/* ---Header-------------------------------- */
 header {
   display: flex;
   flex-direction: column;
@@ -191,8 +50,8 @@ header {
   background: none;
 }
 
-/* header animation code adapted from https://codepen.io/nodws/pen/aWgMMQ */
 header:after{
+  /* header:after gradient code adapted from https://codepen.io/nodws/pen/aWgMMQ */
   content:"";
   width:100%;
   height:100%;
@@ -200,10 +59,12 @@ header:after{
   bottom:0;
   left:0;
   z-index:-1;
+  /* creates a gradient from transperant to white at the bottom of the header */
   background: linear-gradient(to bottom, rgba(255, 255, 255, 0.12) 60%,var(--main-bg-color) 100%);
 }
 
 header:before{
+  /* header:before code adapted from https://codepen.io/nodws/pen/aWgMMQ */
   content:"";
   width:100%;
   height:200%;
@@ -214,21 +75,8 @@ header:before{
   background-position: bottom -100px right 0;
   background-size: cover; 
   background-attachment:fixed;
-  transition:all 0.4s ease-in-out;
+  /* Z-index moves background to the back of the page, so that the text elements in the header  can be selected */
   z-index:-2;
-}
-
-
-header h1, header h2, header h3, .section-heading > *, fieldset > div{
-  background-color:rgba(51, 129, 185, 0.5);
-  width: fit-content;
-  padding: 0 1rem;
-  border-radius: 1rem;
-  color: white;
-}
-
-fieldset > div:hover{
-  background-color:rgba(51, 129, 185, 1);
 }
 
 header h1{
@@ -239,9 +87,182 @@ header h3{
   line-height: 4rem;
 }
 
+header h1, header h2, header h3, .section-heading > *, fieldset > div{
+  /* Highlighting some text with a transperant blue for better readability  */
+  background-color:rgba(51, 129, 185, 0.5);
+  width: fit-content;
+  padding: 0 1rem;
+  border-radius: 1rem;
+  color: white;
+}
+
+
+/* <Main> Styles--------------------------------- */
+
+/* Block Elements -------------*/
+section{
+  padding: 6rem;
+}
+
 section, article{
   /* add spacing for organisation */
   margin-top: var(--section-spacing);
+}
+
+section > img{
+  margin-bottom: 2rem;
+}
+
+.callout,.section-heading,fieldset{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "DM Serif Display", serif;
+}
+
+fieldset{
+  /* Makes the radio buttons appear in an neatly spaced row */
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  font-family: "DM Sans", sans-serif;
+  font-size: 1.5rem;
+}
+
+fieldset > div:hover{
+  background-color:rgba(51, 129, 185, 1);
+}
+
+img{
+  max-width: 100%;
+}
+
+article{
+  gap: 3rem;
+    align-items: center;
+}
+
+.section-heading, article{
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+
+/* Inline elements ------------------------------*/
+
+p, li, br{
+  font-size: 1.25rem;
+  margin: 2rem 0;
+  line-height: 2rem;
+}
+
+h1,h2,h3{
+  margin: 0;
+}
+
+h1{
+  font-size: 5rem;
+  margin-bottom: 2rem;
+}
+
+h1 strong{
+  font-weight: 5000;
+}
+
+h2{
+  font-size: 4.4rem;
+}
+
+h3{
+  font-size: 2.4rem;
+}
+
+/* <Footer> Styles---------------------- */
+
+footer{
+  background-color: rgb(51, 160, 255);
+  color: white;
+  width: 100%;
+  height: fit-content;
+  padding: 0.5rem;
+}
+
+
+/* CLASS STYLING ---------------------------------------------------- */
+
+/* Fonts from Google Fonts: https://fonts.google.com/selection/embed */
+.dm-serif-display-regular {
+  font-family: "DM Serif Display", serif;
+  font-style: normal;
+}
+
+.dm-serif-display-regular-italic {
+  font-family: "DM Serif Display", serif;
+  font-style: italic;
+}
+
+.callout{
+  width: 100%;
+  height: 90vh;
+  font-style: italic;
+}
+
+.callout > *{
+  /* We limit the width of text in the callout to increase whitespace and create visual interest */
+  max-width: 50rem;
+}
+
+.graph{
+  margin: 0 2rem;
+  width: 100%;
+}
+
+.section-heading{
+  align-items: start;
+  color:white;
+  height: 50rem;
+  position: relative;
+  gap: 0rem;
+
+  /* Below code gives the background-image of the section heading a parralax effect when scrolling */
+  /* parallax code from https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_parallax*/
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: -2;
+
+}
+
+.section-heading:after, .section-heading:before{
+  /* This helps insert a fade-to white gradient on the top and bottom edges of the header, for a softer, smoother look */
+  position: absolute;
+  content:"";
+  width:100%;
+  height:100%;
+  bottom:0;
+  left:0;
+  z-index: -1;
+}
+
+.section-heading:after{
+  /* bottom gradient */
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.00) 80%,var(--main-bg-color) 100%);
+}
+
+.section-heading::before{
+  /* top gradient */
+  background: linear-gradient(to top, rgba(255, 255, 255, 0.00) 80%,var(--main-bg-color) 100%);
+}
+
+
+/* ID STYLING ---------------------------------------------------- */
+
+/* --- Opening-------------------------------- */
+#opening{
+  padding-top: 4rem;
 }
 
 /* ---Part 1-------------------------------- */
@@ -253,36 +274,41 @@ section, article{
 #part2-header{
   background-image: url('./images/part2-1.jpg');
 }
-/* ---Part 3-------------------------------- */
-#part3-header{
-  background-image: url('./images/part3-1.jpg');
-}
-/* ---Part 4-------------------------------- */
-#part4-header{
-  background-image: url('./images/selfcare.jpg');
+
+#symptoms{
+  height: 40rem;
 }
 
-
-section > img{
-  margin-bottom: 2rem;
+#symptoms_description{
+  width: fit-content;
+  margin: 0 4rem;
+  padding: 2rem 3rem;
+  background-color: #3381B9;
+  color: rgb(255, 255, 255);
+  font-style: italic;
+  border-radius: 1rem;
+  text-align: left;
 }
 
-
-
-#opening{
-  padding-top: 4rem;
+#symptoms_description > a{
+  color: rgb(255, 255, 255);
 }
 
-
-
-footer{
-  background-color: rgb(51, 160, 255);
-  color: white;
-  width: 100%;
-  height: fit-content;
-  padding: 0.5rem;
+#symptoms_description li{
+  margin: 1rem 0;
 }
-  
+
+#habit_graph{
+  background-color: var(--main-text-color);
+  border-radius: 1rem;
+  justify-content: start;
+}
+
+#habit_graph > div:nth-child(2){
+  /* make the middle graph slightly bigger for empahsis */
+  flex: 1.8;
+}
+
 #resources, #habit_graph {
   display: flex;
   flex-direction: row;
@@ -297,15 +323,21 @@ footer{
   flex: 1;
 }
 
-#habit_graph{
-  background-color: var(--main-text-color);
-  border-radius: 1rem;
-  justify-content: start;
+/* ---Part 3-------------------------------- */
+#part3-header{
+  background-image: url('./images/part3-1.jpg');
 }
 
-#habit_graph > div:nth-child(2){
-  /* make the middle graph slightly bigger for empahsis */
-  flex: 1.8;
+
+/* ---Part 4-------------------------------- */
+#part4-header{
+  background-image: url('./images/selfcare.jpg');
+}
+
+/* ---Part 5 (Links)-------------------------------- */
+#resolution fieldset{
+  width: fit-content;
+  gap: 4rem;
 }
 
 #resources{
@@ -346,27 +378,4 @@ footer{
 
 #resources > article > a > img{
   height: 10rem;
-}
-
-#symptoms{
-  height: 40rem;
-}
-
-#symptoms_description{
-  width: fit-content;
-  margin: 0 4rem;
-  padding: 2rem 3rem;
-  background-color: #3381B9;
-  color: rgb(255, 255, 255);
-  font-style: italic;
-  border-radius: 1rem;
-  text-align: left;
-}
-
-#symptoms_description > a{
-  color: rgb(255, 255, 255);
-}
-
-div #symptoms_description li{
-  margin: 1rem 0;
 }

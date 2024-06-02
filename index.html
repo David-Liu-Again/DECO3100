@@ -1,75 +1,99 @@
+<!-- Ideal screen resolution: 1920 x 1080 -->
+<!-- Best Browser: Microsoft Edge -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Importing the css stylesheet -->
     <link rel="stylesheet" href="styles.css">
+
+    <!-- Importing the JS libraries used for graphs -->
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
+    <!-- Importing fonts from Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
 </head>
 
-<!-- Ideal screen resolution: 1920 x 1080 or 1366 x 768 -->
+
 
 <body>
+    <!-- The header, which will have a background image applied in css -->
     <header>
         <h1 class="dm-serif-display-regular">Soft Reset</h1>
         <h3>Escaping anxiety in the age of social media<h3>
     </header>
 
+    <!-- The data story itself is in main -->
     <main>
+
+        <!-- The opening sets the scene for the viewer, acting as a hook for the rest of the page -->
         <section id="opening">
 
+            <!-- Callouts are rhetorical questions that make the viewer pause and reflect. They are contained in a styled div -->
             <div class='callout'>
                 <h2>Why do you use social media?</h2>
             </div>
             
             <p>
                 Is it to keep in touch with friends and family? <br>To find new videos or TV shows to watch? <br>
-                To fill spare time whilst waiting for your order at Subway to <strong>finally</strong> arrive? <br>No matter 
-                the reason, there is one indisputable fact about social media that we can all agree on: 
-                
+                To fill spare time whilst waiting for your order at Subway to <strong>finally</strong> arrive? <br>
+                No matter the reason, there is one indisputable fact about social media that we can all agree on: 
             </p>
 
             <p><strong>It. Is. Everywhere.</strong></p>
+
             <p>
                 Most of us have welcomed social networks into our lives without a second thought. <br>
                 But what impact these technologies have on our mental wellbeing? <br> 
                 Does scrolling your feed actually make you feel better or does it do more harm than good?
             </p>
+
         </section>
 
+        <!-- section-heading elements are transitions that introduce each new part of the story -->
         <section class="section-heading" id="part1-header">
-            <h3>Part 1:</h3>
-            <h1>Everything. Everywhere. All at Once.</h1>
-            <!-- <img src="images/part1.jpg"> -->
-        </section>
 
+            <h3>Part 1:</h3>
+
+            <h1>Everything. Everywhere. All at Once.</h1>
+
+        </section>
+        
+        <!-- Each part of 4 parts of the page are contained in a unique section, for easy styling -->
         <section id="introduction">
             
-            <!-- Graph 1A -->
+            <!-- Each graph and accompanying body text is contained in an article. Articles are spaced apart in the css for better visual flow -->
             <article>
+                <!-- Graph 1A: Daily Usage Time on Social Media -->
                 <h2>Average time spent on social media each day</h2>
+                <!-- Divs with class graph are converted into graphs by plotlyJS or ApexchartsJS -->
                 <div class="graph" id="usage"></div>
+
+                <!-- br (line breaks) are used to space apart the body text for easier readability -->
                 <p> 
                     Over the last 12 years, the amount of time we spend on social media has increased drastically (Statista, 2024). 
-                    In the Asia-Pacific region (which includes Australia), the average usage time peaked in 2022, at 2 hours and 18
-                    minutes per day.          
+                    In Australia and other Asia-Pacific countries, the average daily usage time has remained at around 2 hours and 15
+                    minutes for the last few years. <br> 
+                    It's clear: Social media is here to stay           
                 </p>
             </article>
 
             <article>
+                <!-- Graph 1B: The Adoption Rate of social media-->
                 <h2>Social media adoption rate among internet users by age and platform</h2>
-                <!-- Graph 1B -->
                 <div class="graph" id="adoption"></div>
                 <p>
                     The enormity of social media (SM), especially amongst youth, is reinforced when we look at the graph below. Nearly
                     all of Generation (Gen) Z, internet users aged 16-24, are on SM and they are the biggest adopters out of any 
-                    generation. <br>This makes Gen Z highly susceptible to both the positive and negative effects of these apps.       
+                    generation. <br>
+                    This makes Gen Z highly susceptible to both the positive and negative effects of these apps.       
                 </p>
             </article>
+
         </section>
         
         <section class="section-heading"  id="part2-header">
@@ -88,14 +112,11 @@
                     The apps that were meant to bring us closer together, can actually lead us to drift further apart. <br>
                     There is no universally agreed upon definition for 'unhealthy' social media use, but there are some warning signs. <br>
                     An unhealthy user might: 
-    
                     <br>
                     <br>1. Worry when they can't access their social media accounts
                     <br>
                     <br>2. Struggle to relax or sleep after spending time on social networking sites
-    
                     <br><br>
-    
                     Problematic social media use is strongly associated with low psychological wellbeing (Worsley, Mansfield, & Corcoran, 2018) and 
                     a number of different mental disorders, including anxiety (Weinstein, 2023).
                     A survey on Australian teenagers by Maquarie University found that Australian teenagers experience more anxiety disorder symptoms as they spend more time using social media problematically.
@@ -105,10 +126,11 @@
             </article>
 
             <article>
+                <!-- Graph 2A: Anxiety Symptoms and Problematic Social Media Use -->
                 <h2>Problematic social media use and anxiety disorder symptoms</h2>
-                <!-- Graph 2A -->
                 <div id="symptoms_description">
-                    <p >
+                    <!-- The text in the below p is updated by Symptoms.js. It will be a description related to the displayed graph below -->
+                    <p>
                     </p>
                 </div>
                 <div class="graph" id="symptoms"></div>
@@ -120,51 +142,45 @@
             </article>
 
             <article>
-                <h2>Anxiety disorders and unhealthy social media behaviours by age</h2>
                 <!-- referenced https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio -->
+                <h2>Anxiety disorders and unhealthy social media behaviours by age</h2>
                 <fieldset id="habit_buttonset">
+                    <!-- A set of radio buttons to change the series being displayed in the radial graphs below -->
                     <legend>Select an Age group</legend>
-                    
+                    <!-- Each Age group is represented by a button with a linked label. Viewers can click on the label or button to select it -->
                     <div>
-                    <input type="radio" id="habits_all_ages" name="habit_buttons" value= "-1" checked />
-                    <label for="habits_all_ages">All Ages</label>
+                        <input type="radio" id="habits_all_ages" name="habit_buttons" value= "-1" checked />
+                        <label for="habits_all_ages">All Ages</label>
                     </div>
-                    
                     <div>
                         <input type="radio" id="habits_16_24" name="habit_buttons" value="0" />
                         <label for="habits_16_24">16-24</label>
                     </div>
-                    
                     <div>
                         <input type="radio" id="habits_25_34" name="habit_buttons" value="1" />
                         <label for="habits_25_34">25-34</label>
                     </div>
-                    
                     <div>
                         <input type="radio" id="habits_35_44" name="habit_buttons" value="2" />
                         <label for="habits_35_44">35-44</label>
                     </div>
-                    
                     <div>
                         <input type="radio" id="habits_45_54" name="habit_buttons" value="3" />
                         <label for="habits_45_54">45-54</label>
                     </div>
-                    
                     <div>
                         <input type="radio" id="habits_55_64" name="habit_buttons" value="4" />
                         <label for="habits_55_64">55-64</label>
                     </div>
                 </fieldset>
-            
-                <p class="centre">Hover over the graphs to learn more.</p>
-
-                <!-- Graphs 2B -->
+                <p>Hover over the graphs to learn more.</p>
                 <div class="graph" id="habit_graph">
+                    <!-- Graphs 2B: Unhealthy Social Media Habits -->
+                    <!-- Each div is a seperate radial graph, but each of them is updated when the viewer presses the radial buttons -->
                     <div id="habits_celeb"></div>
                     <div id="habits_anxiety"></div>
                     <div id="habits_fomo"></div>
                 </div>
-                
                 <p>
                     In addition to screen time, the reasons <strong>why</strong> you use SM has an effect too.
                     <br>
@@ -181,71 +197,82 @@
                     <br>
                     <br>
                     
-                    16-24 year olds (Gen Z) are the most likely to use social media to 'follow celebrities/influencers' and to 'avoid
+                    16-24 year olds are the most likely to use social media to 'follow celebrities/influencers' and to 'avoid
                     missing out on things' and are the most avid social media users in general. They also the highest incidence of anxiety
-                    disorders out of any age group in Australia. Whilst not confirmed, it seems likely that problematic SM behaviours, such as 
+                    disorders out of any age group in Australia. It's likely that problematic SM behaviours, such as 
                     celebrity worship and checking your phone to avoid missing out, is contributing to the rising rates of anxiety amongst young Australians (from ABS data).
-                    <!-- Anxiety disorders have been on the rise over the the past 17 years (based on ABS data) and younger people are always worse off. -->
-                    
                 </p>
             </article>
+
         </section>
         
         <section class="section-heading" id="part3-header">
+
             <h3>Part 3: </h3>
+
             <h1>Don't scroll your life away</h1>
+
         </section>    
 
         <section id="resolution">
+
             <div class='callout'>
                 <h2>Should I delete social media?</h2>
             </div>
-            
-            <p>
-               Whilst it's easy to blame social media at large for your anxiety, the reality is that both mental health and SM is a complex,
-               and affects us all differently.
 
-               What we do know, for sure, is that embracing community and quality relationships is what ultimately leads to higher life 
-               satisfaction. An 85 year old ongoing study on adult development at Harvard medical school found that, during our lifetime, the 
-               connections we make and maintain will impact our wellbeing more than money, genetics, social status or anything else. 
-            </p>
+            <article>
+                <p>
+                    Whilst it's easy to blame social media at large for your anxiety, the reality is that both mental health and SM is a complex,
+                    and affects us all differently.
+     
+                    What we do know, for sure, is that embracing community and quality relationships is what ultimately leads to higher life 
+                    satisfaction. An 85 year old ongoing study on adult development at Harvard medical school found that, during our lifetime, the 
+                    connections we make and maintain will impact our wellbeing more than money, genetics, social status or anything else. 
+                 </p>
+            </article>
+
             <article>
                 <h2>How relationships lead to better life satisfaction</h2>
-                <!-- Graph 3 -->
-                <fieldset id="lifestyle_buttonset" class="outline custom-radio">
+                <fieldset id="lifestyle_buttonset">
+                    <!-- A set of radio buttons to change the series being displayed in the radial graphs below -->
                     <legend>Lifestyle Factors</legend>
-                    
                     <div>
                         <input type="radio" id="lifestyle_friends" name="lifestyle_buttons" value= "0" checked />
                         <label for="lifestyle_friends">Valuing Friends</label>
                     </div>
-                    
                     <div>
                         <input type="radio" id="lifestyle_family" name="lifestyle_buttons" value="1" />
                         <label for="lifestyle_family">Valuing Family</label>
                     </div>
                 </fieldset>
+                <!-- Graph 3: Lifestyle factors on Life Satisfaction -->
                 <div class="graph" id="lifestyle"></div>
                 <p>
                     Joining a community organisation, spending time with family and making new friends are great ways to improve your health
                     and get more out of life. SM, if used wisely, can help us facilitate these valuable relationships.
                 </p>
             </article>
+
         </section>
         
         <section class="section-heading" id="part4-header">
+
             <h3>Part 4: </h3>
+
             <h1>Take care of yourself</h1>
+
         </section>
 
         <section id="advice">
+
             <p> 
                 You may have gotten this advice before, but what does self-care really mean? 
                 Unfortunately, there is no one-size-fits all solution, but a good place
                 to start by noticing your feelings throughout the day. When do you feel invigorated?
                 When do you feel drained? Taking small steps each day to feel more energetic and healthy can lead to 
                 significant improvements later on. Here are some ideas to get started:
-                
+
+                <!-- Dot point symbol code from https://www.freecodecamp.org/news/dot-symbol-bullet-point-in-html-unicode/ -->
                 <br><br>&#x2022; Spend no more than 2 hours on social media each day
                 <br><br>&#x2022; Journal to reflect on what happened in your day to day life
                 <br><br>&#x2022; Maintain a good diet
@@ -259,30 +286,30 @@
         </section>
         
         <section id="links">
+
             <h1>It's Ok to not be Ok</h1>
             
             <p>If you're struggling, know that you're not alone. There are organisations that can help you</p>
             
             <div id="resources">
                 <article>
-                    <a href="https://headspace.org.au">
+                    <!-- Clicking anywhere on the card opens a link, thanks to the content being wrapped in <a> -->
+                    <a href="https://headspace.org.au" target="_blank">
                         <h4>Headspace</h4>
                         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Headspace_organisation_logo.jpg/375px-Headspace_organisation_logo.jpg">
                         <p>Headspace has centres across Australia that provide online and in-person counselling and support services. 
                             They help with mental health, physical health, drug addictions and work or study problems </p>
                     </a>
                 </article>
-                
                 <article>
-                    <a href="https://au.reachout.com">
+                    <a href="https://au.reachout.com" target="_blank">
                         <h4>ReachOut</h4>
                         <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjM0IiBoZWlnaHQ9IjMwIiB2aWV3Qm94PSIwIDAgMjM0IDMwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8ZyBjbGlwLXBhdGg9InVybCgjY2xpcDBfMjE3XzQ1NCkiPgo8cGF0aCBkPSJNMjguMTY4MSAyOS4xNzQxTDIxLjgyMTUgMTguNzE2MkMyMi4zODcgMTguNTYwNCAyMi45MzU3IDE4LjM0ODMgMjMuNDU5NSAxOC4wODMxQzI0LjczNzMgMTcuNDU3MyAyNS43OTcxIDE2LjQ1NyAyNi40OTk3IDE1LjIxMzdDMjcuMTg4OSAxMy45ODE4IDI3LjUzNDEgMTIuNTI2MSAyNy41MzUzIDEwLjg0NjZDMjcuNTM1MyA4LjkwNjg4IDI3LjA3OTMgNy4yNDIwMiAyNi4xNjcyIDUuODUxOThDMjUuMjE4MiA0LjQzMDQ5IDIzLjg2MjQgMy4zMzMwNSAyMi4yNzk1IDIuNzA1MjZDMjAuNjA3MyAxLjk4NzI4IDE4LjYzODEgMS42MjgzIDE2LjM3MTggMS42MjgzSDBWMjkuMTc0MUgxMC41MTE3VjE5LjAwODlMMTYuMTc2MSAyOS4xNzQxSDI4LjE2ODFaTTEzLjA1MDQgMTQuOTMwNkgxMC41MTE3VjkuMzA0NzZIMTMuMjg2QzE0LjI5OTQgOS4zMDQ3NiAxNS4wNjc3IDkuNTQxMzMgMTUuNTkwOSAxMC4wMTQ1QzE2LjExNDEgMTAuNDg3NiAxNi4zNzQ0IDExLjE1NTggMTYuMzcxOCAxMi4wMTkyQzE2LjM3MTggMTIuOTM3NCAxNi4wOTE5IDEzLjY1MjEgMTUuNTMyIDE0LjE2MzVDMTQuOTcyMSAxNC42NzQ5IDE0LjE0NDkgMTQuOTMwNiAxMy4wNTA0IDE0LjkzMDZaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNNDAuNjczOSAyMS4yMjI1VjE4LjM1MTJINTEuNDU5MlYxMi4wNTc4SDQwLjY3MzlWOS41ODA1OEg1Mi4yODAxVjEuNjM0NEg0MC42NzM5SDM0LjY5NkgzMC4xNjQxVjI5LjE2ODdIMzQuNjk2SDUyLjM5NlYyMS4yMjI1SDQwLjY3MzlaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNNzQuMzYyMSAyOS4xNzQxSDg1LjI2MTRMNzcuMDE4NSAxLjYyODNINjEuODk3TDUzLjczMTkgMjkuMTc0MUg2NC4zOTc2TDY1LjM4IDI1LjIwMjlINzMuMzUxMkw3NC4zNjIxIDI5LjE3NDFaTTY3LjAxMDMgMTguNTg4MUw2OS4zMDc2IDkuMjg5NDZMNzEuNjcxNCAxOC41ODgxSDY3LjAxMDNaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMTA1LjYzNyAyOS4zNjUxQzEwNy4zMDEgMjguOTY3NSAxMDguOTA1IDI4LjM0NiAxMTAuNDA1IDI3LjUxNzJWMTkuMTc3QzEwOS4zMjcgMTkuNzYzNSAxMDguMTg2IDIwLjIyNTYgMTA3LjAwNSAyMC41NTQzQzEwNS43NDcgMjAuOTE4OSAxMDQuNDQ1IDIxLjEwNDMgMTAzLjEzNiAyMS4xMDUyQzEwMS41MjEgMjEuMTA1MiAxMDAuMTIxIDIwLjg3NTYgOTguOTM3IDIwLjQxNjVDOTcuODU0IDIwLjAzMzggOTYuOTAzOSAxOS4zNDQzIDk2LjIwMDggMTguNDMxQzk1LjU1OTIgMTcuNTQzMyA5NS4yMjUzIDE2LjQ2NzggOTUuMjUwNyAxNS4zNzAzQzk1LjIyOTEgMTQuMjg0NiA5NS41NTg1IDEzLjIyMTIgOTYuMTg5NCAxMi4zNDAzQzk2LjgxMzkgMTEuNDczMSA5Ny43MTkgMTAuODEwNiA5OC45MDQ3IDEwLjM1MjhDMTAwLjI0OSA5Ljg2NzQ4IDEwMS42NyA5LjYzMzQ2IDEwMy4wOTggOS42NjIyM0MxMDQuMzk0IDkuNjY4NzMgMTA1LjY4MiA5Ljg1NDA5IDEwNi45MjcgMTAuMjEzMUMxMDguMTAxIDEwLjUyNyAxMDkuMjI5IDEwLjk4OTggMTEwLjI4NyAxMS41OTA0VjMuMDE2ODJDMTA4LjgwNiAyLjI4NTI2IDEwNy4yNDYgMS43MzExOSAxMDUuNjM3IDEuMzY1OThDMTAzLjg3OCAwLjk4MzYxNSAxMDIuMDgzIDAuNzk4ODQ3IDEwMC4yODQgMC44MTUwNjlDOTYuODIwOSAwLjgxNTA2OSA5My44NjQyIDEuNDU3MTcgOTEuNDE0MyAyLjc0MTM2Qzg4Ljk2NDMgNC4wMjU1NSA4Ny4xMDg1IDUuNzgyODcgODUuODQ2OCA4LjAxMzMxQzg0LjU4IDEwLjI0MjUgODMuOTQ2NiAxMi43NzI2IDgzLjk0NjYgMTUuNjAzN0M4My45MTI3IDE4LjE3MSA4NC41NTMxIDIwLjcwMTcgODUuODAzMSAyMi45Mzk3Qzg3LjAzOTQgMjUuMTMwNiA4OC44NzYzIDI2Ljg1MjIgOTEuMzEzNSAyOC4xMDQ1QzkzLjc1MDggMjkuMzU2OCA5Ni42NDg2IDI5Ljk4NjEgMTAwLjAwNyAyOS45OTI1QzEwMS45MDIgMzAuMDA4OSAxMDMuNzkyIDI5Ljc5ODMgMTA1LjYzNyAyOS4zNjUxWiIgZmlsbD0id2hpdGUiLz4KPHBhdGggZD0iTTEzMC45MDcgMS42MzQ0VjExLjE5MzJIMTIzLjQ4M1YxLjYzNDRIMTEyLjk3M1YyOS4xNjg3SDEyMy40ODNWMTkuNDEyOUgxMzAuOTA3VjI5LjE2ODdIMTQxLjQxN1YxLjYzNDRIMTMwLjkwN1oiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGQ9Ik0xOTguODAzIDI4LjUyNDVDMjAwLjgwMiAyNy42MjcgMjAyLjQ5NCAyNi4xNTY3IDIwMy42NjggMjQuMjk3QzIwNC44MDggMjIuNDYwNiAyMDUuMzc4IDIwLjI5NzEgMjA1LjM3OCAxNy44MDY1VjEuNjQwNjJIMTk0LjkwNlYxNy4wMjAzQzE5NC45MDYgMTguMTY4MSAxOTQuNiAxOS4wNzIyIDE5My45ODggMTkuNzMyOEMxOTMuMzc2IDIwLjM5MzQgMTkyLjU2MiAyMC43MjEyIDE5MS41NDYgMjAuNzE2MUMxOTAuOTQ1IDIwLjcyOTMgMTkwLjM1MSAyMC41OCAxODkuODI3IDIwLjI4MzdDMTg5LjMyNiAxOS45OTM2IDE4OC45MjggMTkuNTUzNyAxODguNjg3IDE5LjAyNTFDMTg4LjQxIDE4LjM5NDQgMTg4LjI3NiAxNy43MDk2IDE4OC4yOTUgMTcuMDIwM1YxLjY0MDYySDE3Ny44MVYxNy44MDY1QzE3Ny44MSAyMC4yOTcxIDE3OC4zNzYgMjIuNDYwNiAxNzkuNTA5IDI0LjI5N0MxODAuNjY4IDI2LjE1NDUgMTgyLjM0NyAyNy42MjU0IDE4NC4zMzUgMjguNTI0NUMxODYuNDE4IDI5LjUwNzcgMTg4LjgyNSAyOS45OTk0IDE5MS41NTYgMjkuOTk5NEMxOTQuMjg3IDI5Ljk5OTQgMTk2LjcwMyAyOS41MDc3IDE5OC44MDMgMjguNTI0NVoiIGZpbGw9IiM3MDQ5RTYiLz4KPHBhdGggZD0iTTIwNy43ODkgMS42MzQ0VjEwLjYwNEgyMTUuNzJWMjkuMTY4N0gyMjYuMjNWMTAuNjA0SDIzNC4wMDVWMS42MzQ0SDIwNy43ODlaIiBmaWxsPSIjNzA0OUU2Ii8+CjxwYXRoIGQ9Ik0xNzMuNzY4IDYuOTYyOTVDMTcyLjQzMiA0Ljc0MTQ4IDE3MC40ODQgMi45NTg0NyAxNjguMTYxIDEuODMwNjRDMTY1Ljc0IDAuNjEwMjE1IDE2Mi45NjYgMCAxNTkuODQgMEMxNTYuNzEzIDAgMTUzLjk0NSAwLjYxMDIxNSAxNTEuNTM2IDEuODMwNjRDMTQ5LjIxNyAyLjk2Njg1IDE0Ny4yNzYgNC43NTcyOSAxNDUuOTQ5IDYuOTg0QzE0NC42NDMgOS4xODEyOCAxNDMuOTg2IDExLjY4MjEgMTQzLjk3NyAxNC40ODY0VjI2LjQ1NzNDMTQzLjk3NyAyNi44MTM3IDE0NC4wNDYgMjcuMTY2NyAxNDQuMTgxIDI3LjQ5NjFDMTQ0LjMxNiAyNy44MjU1IDE0NC41MTQgMjguMTI0OSAxNDQuNzY0IDI4LjM3NzFDMTQ1LjAxNCAyOC42Mjk0IDE0NS4zMTEgMjguODI5NiAxNDUuNjM4IDI4Ljk2NjJDMTQ1Ljk2NSAyOS4xMDI5IDE0Ni4zMTYgMjkuMTczNCAxNDYuNjcgMjkuMTczNkgxNTkuMTE2QzE1OS4zNDQgMjkuMTczNiAxNTkuNTY4IDI5LjE5MDggMTU5LjggMjkuMTkwOEMxNjAuMDMyIDI5LjE5MDggMTYwLjI2MyAyOS4xNzk0IDE2MC40OTUgMjkuMTczNkgxNjAuNjE5QzE2My40MzYgMjkuMDc1NCAxNjUuOTUxIDI4LjQ2NTkgMTY4LjE2NCAyNy4zNDQ5QzE3MC40ODYgMjYuMjA1OCAxNzIuNDMzIDI0LjQxNzMgMTczLjc3MiAyMi4xOTM1QzE3NS4wODcgMTkuOTg5OCAxNzUuNzQ0IDE3LjQ0NjMgMTc1Ljc0NCAxNC41NjI5QzE3NS43NDIgMTEuNjk3NCAxNzUuMDgzIDkuMTY0MDYgMTczLjc2OCA2Ljk2Mjk1Wk0xNTMuODIgMTYuNzM5OEMxNTMuMzk2IDE2Ljc1NzMgMTUyLjk3NyAxNi42NDY5IDE1Mi42MTcgMTYuNDIyOEMxNTIuMjU2IDE2LjE5ODYgMTUxLjk3IDE1Ljg3MSAxNTEuNzk2IDE1LjQ4MkMxNTEuNjIyIDE1LjA5MjkgMTUxLjU2NyAxNC42NjAzIDE1MS42MzkgMTQuMjM5OEMxNTEuNzExIDEzLjgxOTMgMTUxLjkwNiAxMy40MyAxNTIuMiAxMy4xMjIxQzE1Mi40OTMgMTIuODE0MyAxNTIuODcyIDEyLjYwMTggMTUzLjI4NiAxMi41MTIxQzE1My43IDEyLjQyMjQgMTU0LjEzMiAxMi40NTk2IDE1NC41MjUgMTIuNjE4OUMxNTQuOTE5IDEyLjc3ODEgMTU1LjI1NiAxMy4wNTIyIDE1NS40OTMgMTMuNDA1OEMxNTUuNzMgMTMuNzU5NCAxNTUuODU3IDE0LjE3NjMgMTU1Ljg1NyAxNC42MDMxQzE1NS44NjYgMTUuMTU3NiAxNTUuNjU2IDE1LjY5MzEgMTU1LjI3NSAxNi4wOTMzQzE1NC44OTQgMTYuNDkzNCAxNTQuMzcxIDE2LjcyNTcgMTUzLjgyIDE2LjczOThaTTE1OS44NTkgMTYuNzM5OEMxNTkuNDM1IDE2Ljc1NyAxNTkuMDE2IDE2LjY0NjIgMTU4LjY1NiAxNi40MjE4QzE1OC4yOTUgMTYuMTk3NCAxNTguMDEgMTUuODY5NiAxNTcuODM2IDE1LjQ4MDVDMTU3LjY2MiAxNS4wOTE1IDE1Ny42MDggMTQuNjU4OSAxNTcuNjggMTQuMjM4NUMxNTcuNzUyIDEzLjgxODEgMTU3Ljk0OCAxMy40MjkgMTU4LjI0MSAxMy4xMjEzQzE1OC41MzUgMTIuODEzNyAxNTguOTEzIDEyLjYwMTQgMTU5LjMyNyAxMi41MTE5QzE1OS43NDIgMTIuNDIyNCAxNjAuMTczIDEyLjQ1OTcgMTYwLjU2NiAxMi42MTlDMTYwLjk2IDEyLjc3ODMgMTYxLjI5NiAxMy4wNTI0IDE2MS41MzQgMTMuNDA1OUMxNjEuNzcxIDEzLjc1OTUgMTYxLjg5OCAxNC4xNzY0IDE2MS44OTggMTQuNjAzMUMxNjEuOTA2IDE1LjE1NzkgMTYxLjY5NyAxNS42OTM3IDE2MS4zMTUgMTYuMDkzOUMxNjAuOTMzIDE2LjQ5NDEgMTYwLjQxIDE2LjcyNjIgMTU5Ljg1OSAxNi43Mzk4Wk0xNjUuODk3IDE2LjczOThDMTY1LjQ3NCAxNi43NTcgMTY1LjA1NSAxNi42NDYyIDE2NC42OTUgMTYuNDIxOEMxNjQuMzM0IDE2LjE5NzQgMTY0LjA0OSAxNS44Njk2IDE2My44NzUgMTUuNDgwNUMxNjMuNzAxIDE1LjA5MTUgMTYzLjY0NiAxNC42NTg5IDE2My43MTkgMTQuMjM4NUMxNjMuNzkxIDEzLjgxODEgMTYzLjk4NiAxMy40MjkgMTY0LjI4IDEzLjEyMTNDMTY0LjU3MyAxMi44MTM3IDE2NC45NTIgMTIuNjAxNCAxNjUuMzY2IDEyLjUxMTlDMTY1Ljc4MSAxMi40MjI0IDE2Ni4yMTIgMTIuNDU5NyAxNjYuNjA1IDEyLjYxOUMxNjYuOTk4IDEyLjc3ODMgMTY3LjMzNSAxMy4wNTI0IDE2Ny41NzIgMTMuNDA1OUMxNjcuODEgMTMuNzU5NSAxNjcuOTM2IDE0LjE3NjQgMTY3LjkzNiAxNC42MDMxQzE2Ny45NDUgMTUuMTU3OSAxNjcuNzM2IDE1LjY5MzcgMTY3LjM1NCAxNi4wOTM5QzE2Ni45NzIgMTYuNDk0MSAxNjYuNDQ4IDE2LjcyNjIgMTY1Ljg5NyAxNi43Mzk4WiIgZmlsbD0iIzcwNDlFNiIvPgo8L2c+CjxkZWZzPgo8Y2xpcFBhdGggaWQ9ImNsaXAwXzIxN180NTQiPgo8cmVjdCB3aWR0aD0iMjM0IiBoZWlnaHQ9IjMwIiBmaWxsPSJ3aGl0ZSIvPgo8L2NsaXBQYXRoPgo8L2RlZnM+Cjwvc3ZnPgo=">
                         <p>ReachOut is a safe, online community for young people to express themselves honestly and get advice around struggles in their life. You can also speak to a trained peer worker or browse their helpful articles</p>
                     </a>
                 </article>
-                
                 <article>
-                    <a href="https://www.beyondblue.org.au/get-support">
+                    <a href="https://www.beyondblue.org.au/get-support" target="_blank">
                         <h4>Beyond Blue</h4>
                         <img src="https://edge.sitecorecloud.io/beyondblue1-beyondblueltd-p69c-fe1e/media/Project/Sites/beyondblue/Logos/beyond-blue-logo-318x141.svg?h=141&iar=0&w=318">
                         <p>Beyond Blue provides free mental health services including online counselling, an online peer support community and mental health coaching
@@ -290,15 +317,18 @@
                     </a>
                 </article>
             </div>
+
         </section>
         
-
     </main>
 
     <footer>
+
         <p>By David Liu 2024</p>
+
     </footer>
     
+    <!-- Importing all the self-authored javascript that is used for each of the 5 graphs -->
     <script src="usage.js"></script>
     <script src="adoption.js"></script>
     <script src="symptoms.js"></script>
